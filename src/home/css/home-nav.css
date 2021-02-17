@@ -1,0 +1,156 @@
+:root {
+    --primary-color: rgba(52,54,137,0.98);
+}
+
+header {
+    background-color: var(--primary-color);
+    height:12vh;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-logo {
+    width:200px;
+    height:200px;
+    margin-right:30px;
+}
+
+.home-logo img {
+    width:100%;
+}
+
+.home-nav-container {
+    display:flex;
+    width:98%;
+    justify-content: space-between;
+}
+
+#header-left-nav {
+    display:flex;
+    align-items: center;
+    width:40%;
+    /* background-color: maroon; */
+}
+
+#header-right-nav {
+    display:flex;
+    width:10%;
+    justify-content: space-evenly;
+    /* background-color:magenta; */
+    align-items: center;
+}
+
+#lower-nav {
+    height:7vh;
+    width:100vw;
+    background-color: rgba(61,66,180,0.9);
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#lower-nav a {
+    color:white;
+    text-decoration: none;
+    font-weight:500;
+}
+
+.lower-navigation {
+    width:94%;
+    /* justify-content: flex-start; */
+}
+
+.notif-set {
+    height:40px;
+    position: relative;
+    width:35px;
+    background-color:#fff;
+    border-radius: 8px;
+    /* display:flex;
+    align-items: center;
+    justify-content: center; */
+    color:rgba(0, 0, 0, 0.75);
+    overflow:hidden;
+}
+
+.profile-icon {
+    position: relative;
+    /* display:flex;
+    justify-content: center;
+    align-items: center; */
+    height:40px;
+    width:40px;
+    border-radius: 50%;
+    background-color:#fff;
+    color:rgba(0, 0, 0, 0.75);
+    overflow:hidden;
+}
+
+.notif-set span {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+}
+
+.profile-icon span {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+}
+
+.pointer {
+    cursor:pointer;
+}
+
+.search-bar {
+    position: relative;
+    width:50%;
+}
+
+.search-bar input[type="text"] {
+    border-radius:8px;
+    padding:.9em;
+    border:none;
+    outline:none;
+    width:100%;
+}
+
+#search-icon {
+    position:absolute;
+    top:50%;
+    transform:translate(-50%, -50%);
+    right:2%;
+    color:rgba(0, 0, 0, 0.4);
+}
+
+.color-filler {
+    position:absolute;
+    background-color:rgba(0, 0, 0, 0.7);
+    height:0;
+    width:100%;
+    bottom:0;
+    transition:.5s height ease-in-out;
+}
+
+.profile-icon:hover .color-filler {
+    height:100%;
+}
+
+.profile-icon:hover {
+    color:white;
+}
+
+.opposite-color-filler {
+    top:0;
+}
+.notif-set:hover .color-filler{
+    /* color:white; */
+    height:100%;
+}
+
+.notif-set:hover {
+    color:white;
+}

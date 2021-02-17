@@ -1,0 +1,134 @@
+.dashboard {
+    display:grid;
+    /* display:grid; */
+    margin:0 auto;
+    height:75vh;
+    width:95%;
+    /* border: 2px solid black; */
+    grid-template-areas:
+    'order-summary checkout'
+    'all-orders checkout';
+    grid-template-rows:1fr 2fr ;
+    grid-template-columns: 1fr 1fr;
+    overflow-y:hidden;
+}
+
+.heading {
+    color:#5F5F63;
+    margin-bottom:40px;
+    width:70%;
+}
+
+.order-summary {
+    grid-area: order-summary;
+    display:flex;
+    flex-direction: column;
+    /* background-color: magenta; */
+}
+
+.checkout{
+    grid-area: checkout;
+    /* background-color: navy; */
+}
+
+.all-orders {
+    grid-area: all-orders;
+    /* background-color: maroon; */
+}
+
+.order-summary-icons {
+    display:inline-block;
+    display:flex;
+    width:100%;
+    justify-content: space-between;
+}
+
+.order-icons {
+    display:flex;
+    align-items: flex-end;
+    /* line-height: 100%; */
+    color:#5F5F63;
+}
+
+.order-icons strong {
+    font-size:3rem;
+    line-height: 100%;
+    margin-bottom:0;
+    margin-left:5px;
+    color:#B6B6B9;
+    font-weight: 900;
+}
+
+.order-icon-description {
+    margin-left:5px;
+    color:#B6B6B9;
+    font-size:1.7rem;
+}
+
+.order-icon-description strong { 
+    font-weight: 900;
+}
+
+.m-t-50 {
+    margin-top:50px;
+}
+
+.m-t-20 {
+    margin-top:20px;
+}
+
+/* All orders Table */
+
+.all-order-data {
+    width:100%;
+    overflow-y: auto;
+    height:300px;
+}
+
+.all-order-data::-webkit-scrollbar {
+    width:0;
+    background-color: transparent;
+}
+
+table {
+    /* table-layout: fixed; */
+    border-collapse: collapse;
+    width:100%;
+}
+
+thead th {
+    position: sticky;
+    top:0;
+    background-color:#f0f0f7;
+    text-align: left;
+}
+
+table th, table tbody tr td {
+    padding: 20px 20px 20px 0;
+}
+
+table tbody tr td:first-child {
+    padding-left:5px;
+}
+
+table td:first-child{
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+table td:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+
+table thead th {
+    text-align: left;
+}
+
+table tbody tr:nth-child(odd){
+/* background-color: #F2F7FD; */
+/* background-color: #c0f7a8; */
+background-color: #d1fcbd;
+}
+
