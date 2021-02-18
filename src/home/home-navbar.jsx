@@ -3,8 +3,59 @@ import './css/home-nav.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell,faSearch,faSlidersH, faUser } from '@fortawesome/free-solid-svg-icons'
 import DashBoard from './dashboard';
+import AllNotifications from './all-notifications';
 
 class HomeNavBar extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            clicked:false
+        }
+    }
+
+    componentDidMount() {
+
+        let notificationContainer = document.querySelector('.notifications-container');
+
+        notificationContainer.addEventListener('transitionend', this.afterTransition);
+        
+    }
+
+    afterTransition = () => {
+        let allNotif = document.querySelector('.all-notifications');
+                    
+                if(allNotif.style.display === 'block' && this.state.clicked ) {
+                    allNotif.style.display = 'none';
+        }
+    }
+
+
+    handleNotifClick = () =>  {
+
+    let notificationContainer = document.querySelector('.notifications-container');
+    let allNotifications = document.querySelector('.all-notifications');
+
+
+    if(notificationContainer.style.transform === 'translate(-40%, 70%)') {
+        allNotifications.style.display = 'block';
+        notificationContainer.style.opacity = '1';
+
+        this.setState({
+            clicked:false
+        });
+
+        notificationContainer.style.transform = 'translate(-40%, 60%)';
+
+        }
+    else {
+        this.setState({
+            clicked:true
+        })
+        notificationContainer.style.transform = 'translate(-40%, 70%)';
+        notificationContainer.style.opacity = '0';
+        }
+    }
 
     render() {
 
@@ -23,7 +74,7 @@ class HomeNavBar extends Component {
                             </div>
                         </div>
                         <nav id="header-right-nav">
-                            <div className="notifications notif-set pointer">
+                            <div onClick={this.handleNotifClick} className="notifications notif-set pointer">
                                 <div className="color-filler"></div>
                                 <span><FontAwesomeIcon icon={faBell} /></span>
                             </div>
@@ -35,6 +86,7 @@ class HomeNavBar extends Component {
                                 <div className="color-filler"></div>
                                 <span><FontAwesomeIcon icon={faUser} /></span>
                             </div>
+                            <AllNotifications />
                         </nav>
                     </div>
                 </header>
