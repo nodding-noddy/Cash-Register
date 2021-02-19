@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './css/dashboard.css';
 import AllOrders from './all-orders';
 import OrderSummary from './order-summary';
+import OrderContents from './order-contents';
 
 class DashBoard extends Component {
 
@@ -11,11 +12,7 @@ class DashBoard extends Component {
             <div className="dashboard m-t-50">
                 <OrderSummary />
                 <AllOrders />
-                <div className="checkout m-t-40 m-l-120 ">
-                    <h1 className="checkout-heading m-b-20">Order Contents</h1>
-                   <div className="billing">
-                    </div> 
-                </div>
+                <OrderContents />
             </div>
         )
     }

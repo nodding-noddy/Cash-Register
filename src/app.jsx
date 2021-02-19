@@ -1,8 +1,8 @@
 import React,{Component} from 'react';
-import NavBar from './navbar';
-import MainContent from './mainContent';
-import SvgPattern from './svgPattern';
-import './css/main.css';
+import NavBar from './login/navbar';
+import MainContent from './login/mainContent';
+import SvgPattern from './login/svgPattern';
+import './main-css/main.css';
 
 class App extends Component {
 

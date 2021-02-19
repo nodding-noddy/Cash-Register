@@ -95,7 +95,7 @@ class HomeNavBar extends Component {
                         <a href="https://www.google.com">Home</a>
                     </div>
                 </nav>
-                <DashBoard />
+                {/* <DashBoard /> */}
             </React.Fragment>
         )
     }

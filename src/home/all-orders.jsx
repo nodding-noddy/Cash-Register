@@ -7,7 +7,7 @@ class AllOrders extends Component {
     constructor() {
         super();
         this.state = {
-            orders:false
+            orders:true
         }
     }
 
@@ -35,7 +35,62 @@ class AllOrders extends Component {
                                     <th>Order Status</th>
                                 </tr>
                             </thead>
-                            <tbody></tbody>
+                            <tbody>
+                                <tr>
+                                    <td>2</td>
+                                    <td>19.58</td>
+                                    <td>Shubh</td>
+                                    <td><div className="completed order-status"> <strong>Done</strong> </div></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>19.58</td>
+                                    <td>Shubh</td>
+                                    <td><div className="completed order-status"> <strong>Done</strong> </div></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>19.58</td>
+                                    <td>Shubh</td>
+                                    <td><div className="pending order-status"> <strong>Pending</strong> </div></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>19.58</td>
+                                    <td>Shubh</td>
+                                    <td><div className="pending order-status"> <strong>Pending</strong> </div></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>19.58</td>
+                                    <td>Shubh</td>
+                                    <td><div className="pending order-status"> <strong>Pending</strong> </div></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>19.58</td>
+                                    <td>Shubh</td>
+                                    <td><div className="pending order-status"> <strong>Pending</strong> </div></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>19.58</td>
+                                    <td>Shubh</td>
+                                    <td><div className="pending order-status"> <strong>Pending</strong> </div></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>19.58</td>
+                                    <td>Shubh</td>
+                                    <td><div className="pending order-status"> <strong>Pending</strong> </div></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>19.58</td>
+                                    <td>Shubh</td>
+                                    <td><div className="pending order-status"> <strong>Pending</strong> </div></td>
+                                </tr>
+                            </tbody>
                         </table>
                         {noOrders}
                     </div>
