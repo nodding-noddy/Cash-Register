@@ -5,6 +5,6 @@ import HomeNavBar from './home/home-navbar';
 import Settings from './settings/main-settings';
 
 ReactDOM.render(
-    <Settings />,
+    <App />,
     document.getElementById('root')
 )

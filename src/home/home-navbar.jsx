@@ -4,6 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell,faSearch,faSlidersH, faUser } from '@fortawesome/free-solid-svg-icons'
 import DashBoard from './dashboard';
 import AllNotifications from './all-notifications';
+import Settings from '../settings/main-settings';
+
+import {
+    BrowserRouter as Router,
+    Link,
+    Route,
+    Switch
+} from 'react-router-dom';
 
 class HomeNavBar extends Component {
 
@@ -11,7 +19,7 @@ class HomeNavBar extends Component {
         super();
         this.state = {
             clicked:false,
-            userIsLoggedIn:false
+            userIsLoggedIn:true
         }
     }
 
@@ -77,7 +85,7 @@ class HomeNavBar extends Component {
                             </div>
                             <div className="settings notif-set pointer">
                                 <div className="color-filler opposite-color-filler"></div>
-                                <span><FontAwesomeIcon icon={faSlidersH} /></span>
+                               <Link to="/settings"><span> <FontAwesomeIcon icon={faSlidersH} /></span></Link>
                             </div>
                             <div className="profile-icon pointer">
                                 <div className="color-filler"></div>
@@ -91,6 +99,7 @@ class HomeNavBar extends Component {
 
 
             <React.Fragment>
+                <Router>
                 <header className="home-header"> 
                     <div className="home-nav-container">
                         <div id="header-left-nav">
@@ -104,13 +113,21 @@ class HomeNavBar extends Component {
                 </header>
                 <nav id="lower-nav">
                     <div className="lower-navigation">
-                        <a href="https://www.google.com">Home</a>
+                       <Link to="/dashboard">Home</Link>
                         <a href="https://www.google.com">About Us</a>
                         <a href="https://www.google.com">Contact Us</a>
                         <a href="https://www.google.com">Support</a>
                     </div>
                 </nav>
-                {/* <DashBoard /> */}
+                <Switch>
+                    <Route path="/dashboard">
+                        <DashBoard />
+                    </Route>
+                    <Route path="/settings">
+                        <Settings />
+                    </Route>
+                </Switch>
+                </Router>
             </React.Fragment>
         )
     }

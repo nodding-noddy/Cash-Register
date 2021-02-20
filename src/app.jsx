@@ -10,7 +10,7 @@ class App extends Component {
         return (
             <div className="login-page">
                 <HomeNavBar />
-                <MainContent />
+                {/* <MainContent /> */}
                 {/* <SvgPattern /> */}
                 {/* <div id="footer"><footer>&copy; Some Technologies</footer></div> */}
             </div>

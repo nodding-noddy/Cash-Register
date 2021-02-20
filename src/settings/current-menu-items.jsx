@@ -8,32 +8,32 @@ class CurrentMenuItems extends Component {
 
             <div className="current-menu-items">
                 <div className="item">
-                    <img src="/images/itachi-pole.jpg" alt="item-image"/>
+                    <img src="/images/itachi-pole.jpg" alt=""/>
                     <div className="item-title"><strong>Veg Kathee Roll</strong></div>
                 </div>
                 <hr />
                 <div className="item">
-                    <img src="/images/itachi-pole.jpg" alt="item-image"/>
+                    <img src="/images/itachi-pole.jpg" alt=""/>
                     <div className="item-title"><strong>Veg Kathee Roll</strong></div>
                 </div>
                 <hr />
                 <div className="item">
-                    <img src="/images/itachi-pole.jpg" alt="item-image"/>
+                    <img src="/images/itachi-pole.jpg" alt=""/>
                     <div className="item-title"><strong>Veg Kathee Roll</strong></div>
                 </div>
                 <hr />
                 <div className="item">
-                    <img src="/images/itachi-pole.jpg" alt="item-image"/>
+                    <img src="/images/itachi-pole.jpg" alt=""/>
                     <div className="item-title"><strong>Veg Kathee Roll</strong></div>
                 </div>
                 <hr />
                 <div className="item">
-                    <img src="/images/itachi-pole.jpg" alt="item-image"/>
+                    <img src="/images/itachi-pole.jpg" alt=""/>
                     <div className="item-title"><strong>Veg Kathee Roll</strong></div>
                 </div>
                 <hr />
                 <div className="item">
-                    <img src="/images/itachi-pole.jpg" alt="item-image"/>
+                    <img src="/images/itachi-pole.jpg" alt=""/>
                     <div className="item-title"><strong>Veg Kathee Roll</strong></div>
                 </div>
                 <hr />

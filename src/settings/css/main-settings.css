@@ -48,7 +48,10 @@
     font-weight: 500;
 }
 
-.sub-settings {
+.sub-settings a {
+    display:inline-block;
+    color:white;
+    text-decoration: none;
     margin-top:5px;
     margin-bottom:5px;
 }
@@ -109,7 +112,7 @@
     margin-left:10px;
 }
 
-.added-item-title-description input[type="text"]{
+.input-text{
     border:none;
     background: transparent;
     font-size:1rem;
@@ -128,12 +131,14 @@
     display:block;
 }
 
-.added-item-title-description label{
+.settings-labels{
+    display:block;
+    margin-bottom:10px;
     font-size:1.25rem;
     font-weight: 800;
 }
 
-.added-item-title-description input[type="submit"]{
+.submit{
     margin-top:10px;
     padding:.95em 1.5em;
     border-radius: 8px;
@@ -141,9 +146,10 @@
     background-color:var(--primary-color);
     font-size:1rem;
     color:white;
+    transition:.5s background-color ease-in-out;
 }
 
-.added-item-title-description input[type="submit"]:hover{
+.submit:hover{
     cursor: pointer;
     background-color: transparent;
     color:var(--primary-font-color);
@@ -158,4 +164,19 @@
     margin-top:10px;
     background-color:transparent;
     border-radius: 8px;
+}
+
+.change-user-name, .change-user-password {
+    display:flex;
+    align-items: center;
+    color:var(--primary-font-color);
+    /* background-color: magenta; */
+}
+
+.change-user-name form{
+    width:40%;
+}
+
+.change-user-name input[type="text"] {
+    width:100%;
 }
