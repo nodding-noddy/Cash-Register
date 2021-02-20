@@ -1,6 +1,7 @@
 
 header {
-    background-color:#4424A9;
+    /* background-color:#4424A9; */
+    background-color:rgba(52,54,137,0.98);
     /* background-color: #f7f0f0; */
     color:white;
     display:flex;

@@ -14,5 +14,8 @@
 }
 
 .svg-div svg {
-    fill: #4424A9;
+    /* fill: #4424A9; */
+   /* fill:rgba(52,54,137,0.98); */
+   fill:#343689;
+   opacity:.97;
 }

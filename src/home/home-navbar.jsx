@@ -10,15 +10,16 @@ class HomeNavBar extends Component {
     constructor() {
         super();
         this.state = {
-            clicked:false
+            clicked:false,
+            userIsLoggedIn:false
         }
     }
 
     componentDidMount() {
 
-        let notificationContainer = document.querySelector('.notifications-container');
+        // let notificationContainer = document.querySelector('.notifications-container');
 
-        notificationContainer.addEventListener('transitionend', this.afterTransition);
+        // notificationContainer.addEventListener('transitionend', this.afterTransition);
         
     }
 
@@ -58,21 +59,17 @@ class HomeNavBar extends Component {
     }
 
     render() {
+        let searchBar;
+        let rightNav;
 
-        return (
-
-            <React.Fragment>
-                <header className="home-header"> 
-                    <div className="home-nav-container">
-                        <div id="header-left-nav">
-                            <div className="home-logo">
-                                <img src="/images/logo-white.png" alt="Cash Register Logo"></img>
-                            </div>
+        if(this.state.userIsLoggedIn) {
+            searchBar =  
                             <div className="search-bar">
                                 <span id="search-icon"><FontAwesomeIcon icon={faSearch} /></span>
                                 <input type="text" name="search-bar" placeholder="Search Something..." id="search"/>
                             </div>
-                        </div>
+
+            rightNav = 
                         <nav id="header-right-nav">
                             <div onClick={this.handleNotifClick} className="notifications notif-set pointer">
                                 <div className="color-filler"></div>
@@ -88,11 +85,29 @@ class HomeNavBar extends Component {
                             </div>
                             <AllNotifications />
                         </nav>
+        }
+
+        return (
+
+
+            <React.Fragment>
+                <header className="home-header"> 
+                    <div className="home-nav-container">
+                        <div id="header-left-nav">
+                            <div className="home-logo">
+                                <img src="/images/logo-white.png" alt="Cash Register Logo"></img>
+                            </div>
+                            {searchBar}
+                        </div>
+                        {rightNav}
                     </div>
                 </header>
                 <nav id="lower-nav">
                     <div className="lower-navigation">
                         <a href="https://www.google.com">Home</a>
+                        <a href="https://www.google.com">About Us</a>
+                        <a href="https://www.google.com">Contact Us</a>
+                        <a href="https://www.google.com">Support</a>
                     </div>
                 </nav>
                 {/* <DashBoard /> */}

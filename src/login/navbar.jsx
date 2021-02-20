@@ -7,7 +7,7 @@ class NavBar extends Component {
     render() {
 
         return (
-            <header>
+            <header id="login-header-nav">
                 <div className="nav-container">
                     <div className="logo">
                         <img src="/images/logo-white.png" alt="Cash Register Logo"></img>

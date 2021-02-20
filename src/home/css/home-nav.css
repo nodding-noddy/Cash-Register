@@ -52,10 +52,11 @@ header {
     color:white;
     text-decoration: none;
     font-weight:500;
+    margin-right:40px;
 }
 
 .lower-navigation {
-    width:90%;
+    width:95%;
 }
 
 .notif-set {
