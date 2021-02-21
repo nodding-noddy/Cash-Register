@@ -15,6 +15,18 @@ import {
 
 class HomeNavBar extends Component {
 
+    defaultStyle = {
+        transition: 'opacity 1000ms ease-in-out',
+        opacity:0
+    }
+
+    transitionStyles = {
+        entering: {opacity: 1},
+        entered: {opacity: 1},
+        exiting: {opacity: 0},
+        exited: {opacity: 0}
+    }
+
     constructor() {
         super();
         this.state = {
@@ -85,7 +97,7 @@ class HomeNavBar extends Component {
                             </div>
                             <div className="settings notif-set pointer">
                                 <div className="color-filler opposite-color-filler"></div>
-                               <Link to="/settings"><span> <FontAwesomeIcon icon={faSlidersH} /></span></Link>
+                               <span><Link to="/settings">Settings</Link> <FontAwesomeIcon icon={faSlidersH} /></span>
                             </div>
                             <div className="profile-icon pointer">
                                 <div className="color-filler"></div>
@@ -113,15 +125,15 @@ class HomeNavBar extends Component {
                 </header>
                 <nav id="lower-nav">
                     <div className="lower-navigation">
-                       <Link to="/dashboard">Home</Link>
+                       <Link to="/">Home</Link>
                         <a href="https://www.google.com">About Us</a>
                         <a href="https://www.google.com">Contact Us</a>
                         <a href="https://www.google.com">Support</a>
                     </div>
                 </nav>
                 <Switch>
-                    <Route path="/dashboard">
-                        <DashBoard />
+                    <Route path="/" exact>
+                            <DashBoard />
                     </Route>
                     <Route path="/settings">
                         <Settings />
