@@ -286,7 +286,7 @@ hr {
 }
 
 .accept:hover {
-    background-color:rgba(0, 128, 0,0.9);
+    background-color: rgba(52, 54, 137, 1);
 }
 
 .decline:hover {
@@ -294,9 +294,9 @@ hr {
 }
 
 .accept {
-    background-color:rgba(0, 128, 0,0.8);
+    background-color: rgba(52, 54, 137, 0.9);
 }
 
 .decline {
-    background-color:rgba(255, 0, 0,0.65);
+    background-color:rgba(255, 0, 0,0.67);
 }

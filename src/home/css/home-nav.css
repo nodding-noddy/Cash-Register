@@ -188,6 +188,7 @@ header {
 }
 
 .all-notifications {
+    padding-top:20px;
     position:relative;
     height:400px;
     display:none;
@@ -230,4 +231,19 @@ header {
 .fade-appear-active {
     opacity:1;
     transition:opacity 1000ms ease-in-out;
+}
+
+.notification {
+    padding:20px;
+    margin-bottom:10px;
+    color: var(--primary-font-color);
+    border-bottom: 1px solid rgba(52,54,137,0.5);
+    /* background-color: magenta; */
+    padding:5px;
+    width:100%;
+}
+
+.notification strong {
+    font-size:1.25rem;
+    margin-left:20px;
 }

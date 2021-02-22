@@ -35,13 +35,6 @@ class HomeNavBar extends Component {
         }
     }
 
-    componentDidMount() {
-
-        // let notificationContainer = document.querySelector('.notifications-container');
-
-        // notificationContainer.addEventListener('transitionend', this.afterTransition);
-        
-    }
 
     afterTransition = () => {
         let allNotif = document.querySelector('.all-notifications');
@@ -103,7 +96,7 @@ class HomeNavBar extends Component {
                                 <div className="color-filler"></div>
                                 <span><FontAwesomeIcon icon={faUser} /></span>
                             </div>
-                            <AllNotifications />
+                            <AllNotifications allNotif={this.props.allNotif}/>
                         </nav>
         }
 
@@ -133,7 +126,8 @@ class HomeNavBar extends Component {
                 </nav>
                 <Switch>
                     <Route path="/" exact>
-                            <DashBoard />
+                            <DashBoard orderSummary={this.props.orderSummary}
+                            updateTotalOrderCount={this.props.updateTotalOrderCount}/>
                     </Route>
                     <Route path="/settings">
                         <Settings />

@@ -18,7 +18,8 @@ class DashBoard extends Component {
             <React.Fragment>
                 {/* <HomeNavBar /> */}
                 <div className="dashboard m-t-50">
-                    <OrderSummary />
+                    <OrderSummary orderSummary={this.props.orderSummary}
+                    updateTotalOrderCount={this.props.updateTotalOrderCount} />
                     <AllOrders />
                     <OrderContents />
                 </div>

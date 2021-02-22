@@ -11,12 +11,6 @@ class OrderContents extends Component {
         }
     }
 
-    handleClick = () => {
-        let updateState = !this.state.contents;
-        this.setState({
-            contents:updateState
-        })
-    }
 
     render() {
 

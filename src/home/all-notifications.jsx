@@ -1,21 +1,18 @@
 import React, {Component} from 'react';
 import './css/home-nav.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faSadCry} from '@fortawesome/free-solid-svg-icons'
+import {faPlus, faSadCry} from '@fortawesome/free-solid-svg-icons'
+import { socket } from '../app' 
+
 
 class AllNotifications extends Component {
 
-    constructor() {
-        super();
-        this.state = {
-            notifications:false
-        }
-    }
+
 
     render() {
 
         let noNotificationIcon;
-        if(!this.state.notifications) {
+        if(!this.props.allNotif.notifications) {
             noNotificationIcon = <div className="no-notifications">
                                     <FontAwesomeIcon icon={faSadCry} size="5x" />
                                     <br />
@@ -28,6 +25,7 @@ class AllNotifications extends Component {
             <div className="notifications-container">
                 <div className="all-notifications">
                         {noNotificationIcon}
+                        {this.props.allNotif.recievedNotification}
                 </div>
             </div>
         )
