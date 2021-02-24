@@ -5,12 +5,15 @@ import { faBell,faSearch,faSlidersH, faUser } from '@fortawesome/free-solid-svg-
 import DashBoard from './dashboard';
 import AllNotifications from './all-notifications';
 import Settings from '../settings/main-settings';
+import MainContent from '../login/mainContent';
+import CreateAccount from '../login/create-account';
 
 import {
     BrowserRouter as Router,
     Link,
     Route,
-    Switch
+    Switch,
+    withRouter
 } from 'react-router-dom';
 
 class HomeNavBar extends Component {
@@ -104,39 +107,40 @@ class HomeNavBar extends Component {
 
 
             <React.Fragment>
-                <Router>
-                <header className="home-header"> 
-                    <div className="home-nav-container">
-                        <div id="header-left-nav">
-                            <div className="home-logo">
-                                <img src="/images/logo-white.png" alt="Cash Register Logo"></img>
+                    <header className="home-header"> 
+                        <div className="home-nav-container">
+                            <div id="header-left-nav">
+                                <div className="home-logo">
+                                    <img src="/images/logo-white.png" alt="Cash Register Logo"></img>
+                                </div>
+                                {searchBar}
                             </div>
-                            {searchBar}
+                            {rightNav}
                         </div>
-                        {rightNav}
-                    </div>
-                </header>
-                <nav id="lower-nav">
-                    <div className="lower-navigation">
-                       <Link to="/">Home</Link>
-                        <a href="https://www.google.com">About Us</a>
-                        <a href="https://www.google.com">Contact Us</a>
-                        <a href="https://www.google.com">Support</a>
-                    </div>
-                </nav>
-                <Switch>
-                    <Route path="/" exact>
-                            <DashBoard orderSummary={this.props.orderSummary}
-                            updateTotalOrderCount={this.props.updateTotalOrderCount}/>
-                    </Route>
-                    <Route path="/settings">
-                        <Settings />
-                    </Route>
-                </Switch>
-                </Router>
+                    </header>
+                    <nav id="lower-nav">
+                        <div className="lower-navigation">
+                        <Link to="/">Home</Link>
+                            <a href="https://www.google.com">About Us</a>
+                            <a href="https://www.google.com">Contact Us</a>
+                            <a href="https://www.google.com">Support</a>
+                        </div>
+                    </nav>
+                    <Switch>
+                        <Route path="/" exact>
+                                <DashBoard orderSummary={this.props.orderSummary}
+                                updateTotalOrderCount={this.props.updateTotalOrderCount}/>
+                        </Route>
+                        <Route path="/settings">
+                            <Settings />
+                        </Route>
+                        <Route path="/login">
+                            <MainContent />
+                        </Route>
+                    </Switch>
             </React.Fragment>
         )
     }
 }
 
-export default HomeNavBar;
+export default withRouter(HomeNavBar);

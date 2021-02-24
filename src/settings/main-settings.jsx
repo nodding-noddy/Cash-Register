@@ -22,6 +22,7 @@ class Settings extends Component {
     }
 
     componentDidMount() {
+        document.title="Settings";
         let sideBar = document.querySelector('.settings-side-bar');
         setTimeout( () => sideBar.style.transform = 'translateX(0%)',100);
         console.log('Mounted')

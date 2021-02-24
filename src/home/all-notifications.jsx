@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
 import './css/home-nav.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faPlus, faSadCry} from '@fortawesome/free-solid-svg-icons'
-import { socket } from '../app' 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSadCry } from '@fortawesome/free-solid-svg-icons';
 
 
 class AllNotifications extends Component {
-
-
 
     render() {
 

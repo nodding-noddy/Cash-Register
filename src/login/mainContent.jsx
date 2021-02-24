@@ -1,43 +1,42 @@
 import React,{Component} from 'react';
+import { Switch, Route, Link, Router, withRouter } from 'react-router-dom';
+import CreateAccount from './create-account';
 import './css/main-content.css';
-import {
-    Link,
-    BrowserRouter as Router,
-    Switch,
-    Route
-} from 'react-router-dom';
-import DashBoard from '../home/dashboard';
+import SvgPattern from './svgPattern';
 
 class MainContent extends Component {
+
+    componentDidMount() {
+        console.log('The location is',this.props.history.location.pathname);
+        document.title = "Cash Register - Login";
+    }
 
     render() {
 
         return (
-            <Router>
-                <Switch>
-                    <Route path="/home/dashboard">
-                        <DashBoard />
+            <React.Fragment>
+                    <Route path="/create-account">
+                        <CreateAccount />
                     </Route>
-            <div className="main-content">
-                <a href="../home/dashboard">To dashboad</a>
-                <div className="login-form">
-                    <div className="form">
-                        <strong>Login!</strong>
-                        <form action="">
-                            <label htmlFor="email">Email</label>
-                            <input type="email" name="email" id="" placeholder="Enter your email address"/>
-                            <label htmlFor="pwd">Password</label>
-                            <input type="password" name="pwd" id="" placeholder="Enter your password"/>
-                                <input type="submit" value="Login"/>
-                        </form>
-                        <p> <a href="https://www.google.com"> Don't have an account? Sign Up!</a></p>
+                <div className="main-content">
+                    <div className="login-form">
+                        <div className="form">
+                            <strong>Login!</strong>
+                            <form action="">
+                                <label className="login-label" htmlFor="email">Email</label>
+                                <input className="login-input" type="email" name="email" id="" placeholder="Enter your email address"/>
+                                <label className="login-label" htmlFor="pwd">Password</label>
+                                <input className="login-input" type="password" name="pwd" id="" placeholder="Enter your password"/>
+                                <input className="login-submit" type="submit" value="Login"/>
+                            </form>
+                            <Link to="/create-account">Don't have an account? Sign Up!</Link> 
+                        </div>
                     </div>
                 </div>
-            </div>
-            </Switch>
-            </Router>
+                <SvgPattern />
+            </React.Fragment>
         )
     }
 }
 
-export default MainContent;
+export default withRouter(MainContent);

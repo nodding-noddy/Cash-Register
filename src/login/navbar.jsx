@@ -1,8 +1,16 @@
 import React, {Component} from 'react';
 import './css/navbar.css';
 import Burger from './burgermenu';
+import { withRouter } from 'react-router-dom';
 
 class NavBar extends Component {
+
+    componentDidMount() {
+        let locationName = this.props.history.location.pathname;
+        if(locationName === '/create-account') {
+
+        }
+    }
 
     render() {
 
@@ -28,4 +36,4 @@ class NavBar extends Component {
     }
 }
 
-export default NavBar;
+export default withRouter(NavBar);

@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 
 class ChangeUserName extends Component {
 
+    componentDidMount() {
+        document.title = "Settings: Change Username";
+    }
+
     render() {
 
         return(

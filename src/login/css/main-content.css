@@ -9,7 +9,7 @@
     align-items: center;
 }
 
-.login-form {
+.login-form, .create-account {
     display:flex;
     justify-content: center;
     align-items: center;
@@ -36,9 +36,9 @@
     width:70%;
 }
 
-.login-form input[type="email"], input[type="password"] {
+.login-input {
     display:block;
-    margin-bottom:10px;
+    margin-bottom:20px;
     border:none;
     border-bottom:1px solid #5F5F63;
     background-color: transparent;
@@ -50,8 +50,9 @@
     color: #4d4e4f;
 }
 
-.login-form input[type="submit"] {
+.login-submit {
     background-color: #4424A9;
+    outline:none;
     border:none;
     color:white;
     display:block;
@@ -64,18 +65,18 @@
     transition-property: color, background-color;
 }
 
-.login-form input[type="submit"]:hover {
+.login-submit:hover {
     /* color: #06C0D7; */
     color:#4424A9;
     background-color: transparent;
 }
 
-.login-form input[type="submit"]:focus {
+.login-submit:focus {
     padding: .49rem .99rem;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
-.login-form label {
+.login-label {
     margin-bottom:10px;
     font-size:1.25rem;
     /* color: #5F5F63; */
@@ -93,4 +94,28 @@
 
 .login-form a:hover {
     color: #0786ad;
+}
+
+
+.create-account {
+    position: absolute;
+    top:50%;
+    right:10%;
+    transform: translateY(-40%);
+    width:500px;
+    height:600px;
+    padding:40px
+}
+
+.create-account .form {
+    /* margin-top:20px; */
+}
+
+
+.create-account select, .create-account input[type="date"]{
+    width:50%;
+}
+
+.create-account input {
+    /* margin-left:2px; */
 }

@@ -1,11 +1,16 @@
 import React,{Component} from 'react';
 import HomeNavBar from './home/home-navbar';
-import MainContent from './login/mainContent';
-import SvgPattern from './login/svgPattern';
 import './main-css/main.css';
 import {io} from 'socket.io-client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faPlus, faSadCry} from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import {
+    BrowserRouter as Router,
+     withRouter,
+     Switch,
+     Route,
+    } from 'react-router-dom';
+import CreateAccount from './login/create-account'
 
 let socket;
 
@@ -28,18 +33,18 @@ class App extends Component {
             }
         }
 
-        socket = io('http://localhost:8000/');
+        // socket = io('http://localhost:8000/');
     }
 
 
     componentDidMount() {
-        socket.emit('get-init-notif');
-        socket.on('recieved-init-notif',(initNotif) => { this.showInitNotif(initNotif) });
-        socket.on('order placed', (totalAmount, newOrder) => {
-            this.updateTotalOrderCount();
-            this.updateTotalOrderAmount(totalAmount);
-            this.updateAllOrdersList(newOrder);
-        });
+        // socket.emit('get-init-notif');
+        // socket.on('recieved-init-notif',(initNotif) => { this.showInitNotif(initNotif) });
+        // socket.on('order placed', (totalAmount, newOrder) => {
+        //     this.updateTotalOrderCount();
+        //     this.updateTotalOrderAmount(totalAmount);
+        //     this.updateAllOrdersList(newOrder);
+        // });
     }
 
     updateAllOrdersList = (newOrderData) => {
@@ -85,7 +90,6 @@ class App extends Component {
     }
 
     showInitNotif = (initNotif) => {
-        let allNotif = document.querySelector('.all-notifications');
         initNotif.forEach(notif => {
             let newDiv;
             newDiv = <div className="notification">
@@ -99,16 +103,37 @@ class App extends Component {
     }
 
     render() {
+
+        let homeNavBar;
+        let locationName = this.props.history.location.pathname;
+
+        if(locationName != '/create-account') {
+            if(locationName === '/login' || locationName === '/create-account') {
+                homeNavBar = <HomeNavBar orderSummary={this.state.orderSummary} updateTotalOrderCount={this.updateTotalOrderCount}
+                        allOrders={this.state.allOrders} 
+                        allNotif={this.state.allNotif}
+                        noSearchBar={true}
+                        /> 
+            }
+            else 
+                homeNavBar = <HomeNavBar orderSummary={this.state.orderSummary} updateTotalOrderCount={this.updateTotalOrderCount}
+                        allOrders={this.state.allOrders} 
+                        allNotif={this.state.allNotif}
+                        noSearchBar={true}
+                        /> 
+        }
+
         return (
-            <div className="login-page">
-                <HomeNavBar orderSummary={this.state.orderSummary} updateTotalOrderCount={this.updateTotalOrderCount}
-                allOrders={this.state.allOrders} updateTotalOrderCount={this.updateTotalOrderCount}
-                allNotif={this.state.allNotif}
-                 />
-            </div>
+
+            <Switch>
+                {homeNavBar}
+                <Route path="/create-account">
+                    <CreateAccount />
+                </Route>
+            </Switch>
         )
     }
 }
 
-export default App;
+export default withRouter(App);
 export { socket };

@@ -4,6 +4,10 @@ import AddItems from './add-items';
 
 class EditMenuSettings extends Component {
 
+    componentDidMount() {
+        document.title = "Settings: Edit Menu";
+    }
+
     render() {
         
         return(

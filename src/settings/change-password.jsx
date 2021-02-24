@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 
 class ChangePassword extends Component {
 
+    componentDidMount() {
+        document.title = "Settings: Change Password";
+    }
+
     render() {
 
         return (
