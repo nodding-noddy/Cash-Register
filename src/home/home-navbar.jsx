@@ -7,7 +7,7 @@ import AllNotifications from './all-notifications';
 import Settings from '../settings/main-settings';
 import MainContent from '../login/mainContent';
 import CreateAccount from '../login/create-account';
-
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import {
     BrowserRouter as Router,
     Link,
@@ -77,12 +77,13 @@ class HomeNavBar extends Component {
     render() {
         let searchBar;
         let rightNav;
+        let locationName = this.props.history.location.pathname;
 
-        if(this.state.userIsLoggedIn) {
+        if(locationName != '/login' && locationName != '/create-account') {
             searchBar =  
                             <div className="search-bar">
                                 <span id="search-icon"><FontAwesomeIcon icon={faSearch} /></span>
-                                <input type="text" name="search-bar" placeholder="Search Something..." id="search"/>
+                                <input type="text" name="search-bar" placeholder="Search about orders..." id="search"/>
                             </div>
 
             rightNav = 
@@ -126,18 +127,26 @@ class HomeNavBar extends Component {
                             <a href="https://www.google.com">Support</a>
                         </div>
                     </nav>
-                    <Switch>
-                        <Route path="/" exact>
-                                <DashBoard orderSummary={this.props.orderSummary}
-                                updateTotalOrderCount={this.props.updateTotalOrderCount}/>
-                        </Route>
-                        <Route path="/settings">
-                            <Settings />
-                        </Route>
-                        <Route path="/login">
-                            <MainContent />
-                        </Route>
-                    </Switch>
+                    <TransitionGroup>
+                        <CSSTransition 
+                        key={this.props.history.location.key}
+                        classNames="fade"
+                        timeout={1000}
+                        >
+                        <Switch location={this.props.history.location}>
+                            <Route path="/" exact>
+                                <DashBoard orderSummary={this.props.orderSummary} globalUserLoginStatus={this.props.globalUserLoginStatus}/>
+                            </Route>
+                            <Route path="/settings">
+                                <Settings  globalUserLoginStatus={this.props.globalUserLoginStatus}/>
+                            </Route>
+                            <Route path="/login">
+                                <MainContent globalUserLoginStatus={this.props.globalUserLoginStatus}
+                                setGlobalUserLogin={this.props.setGlobalUserLogin}/>
+                            </Route>
+                        </Switch>
+                    </CSSTransition>
+                    </TransitionGroup>
             </React.Fragment>
         )
     }

@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import './css/main-content.css';
 import NavBar from './navbar';
 import SvgPattern from './svgPattern';
-
+import { Link } from 'react-router-dom';
 class CreateAccount extends Component {
 
     componentDidMount() {
-        // this.props.removeNavBar();
+        console.log('Create Account Mounted')
     }
 
     render() {
@@ -34,6 +34,7 @@ class CreateAccount extends Component {
                         <label htmlFor="dateOfBirth" className="login-label">Date of birth</label>
                         <input className="login-input" type="date" name="phoneNo" id=""/>
                         <input className="login-submit" type="submit"/>
+                        <Link to="/login">Already have an account? login</Link>
                     </form>
                 </div>
             </div>

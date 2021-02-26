@@ -5,7 +5,7 @@
 .dashboard {
     display:grid;
     margin:0 auto;
-    height:75vh;
+    height:80vh;
     width:90%;
     grid-template-areas:
     'order-summary order-contents'

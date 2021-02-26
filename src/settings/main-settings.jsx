@@ -7,9 +7,12 @@ import {
     BrowserRouter as Router,
     Link,
     Switch,
-    Route
+    Route,
+    withRouter
 } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 
 class Settings extends Component {
@@ -17,7 +20,9 @@ class Settings extends Component {
     constructor() {
         super();
         this.state = {
-            appear:true
+            changeUserName:false,
+            changePassword:false,
+            editMenu:false
         }
     }
 
@@ -25,57 +30,84 @@ class Settings extends Component {
         document.title="Settings";
         let sideBar = document.querySelector('.settings-side-bar');
         setTimeout( () => sideBar.style.transform = 'translateX(0%)',100);
-        console.log('Mounted')
+        if(!this.props.globalUserLoginStatus) {
+            this.props.history.push('/login');
+        }
     }
 
     componentWillUnmount() {
         let sideBar = document.querySelector('.settings-side-bar');
-        setTimeout( () => sideBar.style.transform = 'translateX(-100%)',100);
-        console.log('UnMounted')
+        sideBar.style.transform = 'translateX(-100%)';
+    }
+
+    toggleChangeUsername = () => {
+        this.setState({
+            changeUserName:true,
+            changePassword:false,
+            editMenu:false
+        })
+    }
+
+
+    toggleChangePassword = () => {
+        this.setState({
+            changeUserName:false,
+            changePassword:true,
+            editMenu:false
+        })
+    }
+
+    toggleEditMenu= () => {
+        this.setState({
+            changeUserName:false,
+            changePassword:false,
+            editMenu:true
+        })
     }
 
     render() {
+        let changeUserName;
+        let changePassword;
+        let editMenu; 
+
+        if(this.state.changeUserName) 
+            changeUserName = <ChangeUserName />
+
+        if(this.state.changePassword)
+            changePassword = <ChangePassword />
+
+        if(this.state.editMenu)
+            editMenu = <EditMenuSettings />
 
         return (
-            <React.Fragment >
-                <Router>
-                    <div className="settings-container">
-                        <div className="settings-side-bar">
-                            <div className="all-settings">
-                                <div className="all-settings-holder m-t-20">
-                                    <div className="settings-heading"><span className="main-settings-heading">Settings</span></div>
-                                    <div className="setting-categories">
-                                        <div className="account-settings setting-category">
-                                            <span className="settings-heading">Account</span>
-                                            <span className="sub-settings"> <Link to="/change-username">Change Username</Link> </span>
-                                            <span className="sub-settings"> <Link to="/change-password">Change Password</Link> </span>
-                                        </div>
-                                        <div className="menu-settings setting-category">
-                                            <span className="settings-heading">Menu</span>
-                                            <span className="sub-settings"> <Link to="/edit-menu-settings">Edit Menu Items</Link> </span>
-                                        </div>
+                <div className="settings-container">
+                    <div className="settings-side-bar">
+                        <div className="back-button"> <span><Link to="/">To dashboard</Link> <FontAwesomeIcon icon={faArrowLeft} /> </span> </div>
+                        <div className="all-settings">
+                            <div className="all-settings-holder">
+                                <div className="settings-heading"><span className="main-settings-heading">Settings</span></div>
+                                <div className="setting-categories">
+                                    <div className="account-settings setting-category">
+                                        <span className="settings-heading">Account</span>
+                                        <span className="sub-settings" onClick={this.toggleChangeUsername}>Change Username</span>
+                                        <span className="sub-settings" onClick={this.toggleChangePassword}>Change Password</span>
+                                    </div>
+                                    <div className="menu-settings setting-category">
+                                        <span className="settings-heading">Menu</span>
+                                        <span className="sub-settings" onClick={this.toggleEditMenu}>Edit Menu Items</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <Switch>
-                            <Route path="/change-username">
-                                <ChangeUserName />
-                            </Route>
-
-                            <Route path="/change-password">
-                                <ChangePassword />
-                            </Route>
-
-                            <Route path="/edit-menu-settings">
-                                    <EditMenuSettings />
-                            </Route>
-                        </Switch>
                     </div>
-                </Router>
-            </React.Fragment>
+                    { changeUserName }
+
+                    { changePassword }
+
+                    { editMenu }
+                </div>
         )
     }
 }
 
-export default Settings;
+export default withRouter(Settings);

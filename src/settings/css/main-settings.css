@@ -1,7 +1,7 @@
 .settings-container {
     display:grid;
     width:100vw;
-    height:81vh;
+    height:85vh;
     grid-template-columns: 1fr 1fr;
 }
 
@@ -16,6 +16,7 @@
 
 .all-settings {
     display:flex;
+    margin-left:20px;
 }
 
 .all-settings-holder {
@@ -47,16 +48,22 @@
 }
 
 .settings-heading {
+    margin-top:10px;
     font-size:1.5rem;
     font-weight: 500;
 }
 
-.sub-settings a {
+.sub-settings  {
     display:inline-block;
     color:white;
     text-decoration: none;
     margin-top:5px;
     margin-bottom:5px;
+}
+
+.sub-settings:hover {
+    cursor:pointer;
+    color:#eddfb7;
 }
 
 /*Edit Menu Settings */
@@ -184,4 +191,35 @@
 
 .added-item-title-description .input-text {
     width:50%;
+}
+
+.back-button {
+    position:relative;
+    height:40px;
+    width:40px;
+    background-color:white;
+    border-radius: 50%;
+    margin-left:10px;
+    margin-top:10px;
+    overflow:hidden;
+    color:var(--primary-color);
+    /* margin-bottom:20px; */
+}
+
+.back-button span {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+.back-button a {
+    position:absolute;
+    opacity: 0;
+    transform: translate(-50%,-50%);
+    font-size:4rem;
+}
+
+.back-button:hover {
+    color:#0e0042;
 }

@@ -16,9 +16,11 @@ let socket;
 
 class App extends Component {
 
+
     constructor() {
 
         super();
+
 
         this.state = {
             orderSummary: {
@@ -30,7 +32,8 @@ class App extends Component {
             allNotif: {
                 notifications:true,
                 recievedNotification:[]
-            }
+            },
+            userIsLoggedIn:false
         }
 
         // socket = io('http://localhost:8000/');
@@ -45,6 +48,14 @@ class App extends Component {
         //     this.updateTotalOrderAmount(totalAmount);
         //     this.updateAllOrdersList(newOrder);
         // });
+    }
+
+    setGlobalUserLogin = () => {
+        this.setState({
+            userIsLoggedIn:true
+        })
+
+        this.props.history.push('/');
     }
 
     updateAllOrdersList = (newOrderData) => {
@@ -109,17 +120,19 @@ class App extends Component {
 
         if(locationName != '/create-account') {
             if(locationName === '/login' || locationName === '/create-account') {
-                homeNavBar = <HomeNavBar orderSummary={this.state.orderSummary} updateTotalOrderCount={this.updateTotalOrderCount}
+                homeNavBar = <HomeNavBar orderSummary={this.state.orderSummary} globalUserLoginStatus={this.state.userIsLoggedIn}
                         allOrders={this.state.allOrders} 
                         allNotif={this.state.allNotif}
                         noSearchBar={true}
+                        setGlobalUserLogin={this.setGlobalUserLogin}
                         /> 
             }
             else 
-                homeNavBar = <HomeNavBar orderSummary={this.state.orderSummary} updateTotalOrderCount={this.updateTotalOrderCount}
+                homeNavBar = <HomeNavBar orderSummary={this.state.orderSummary} globalUserLoginStatus={this.state.userIsLoggedIn}
                         allOrders={this.state.allOrders} 
                         allNotif={this.state.allNotif}
                         noSearchBar={true}
+                        setGlobalUserLogin={this.setGlobalUserLogin}
                         /> 
         }
 

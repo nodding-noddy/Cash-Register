@@ -3,11 +3,21 @@ import './css/dashboard.css';
 import AllOrders from './all-orders';
 import OrderSummary from './order-summary';
 import OrderContents from './order-contents';
+import { withRouter } from 'react-router-dom';
 
 class DashBoard extends Component {
 
     componentDidMount() {
         document.title="Home";
+        if(!this.props.globalUserLoginStatus) {
+            this.props.history.push('/login');
+        }
+        else {
+            let svgHolder = document.querySelector('.svg-holder');
+            if(svgHolder) {
+                svgHolder.style.opacity = '0';
+            }
+        }
     }
 
     render() {
@@ -26,4 +36,4 @@ class DashBoard extends Component {
     }
 }
 
-export default DashBoard;
+export default withRouter(DashBoard);

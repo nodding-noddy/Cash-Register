@@ -14,7 +14,6 @@ class OrderSummary extends Component {
 
         return (
                 <div className="order-summary">
-                    <button type="button" onClick={this.props.updateTotalOrderCount}>Inc total count</button>
                     <div className="recent-orders heading m-b-20"><h1>Orders Summary</h1></div>
                     <div className="order-summary-icons">
                         <div className="total-orders o-ico">
