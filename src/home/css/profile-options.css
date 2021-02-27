@@ -1,0 +1,46 @@
+.profile-options-container {
+    position:absolute;
+    transform: translate(20%,95%);
+    opacity: 0;
+    transition-property: transform, opacity;
+    transition: .25s  ease-in-out;
+}
+
+.profile-options {
+    padding-top:20px;
+    position:relative;
+    height:100px;
+    display:none;
+    width:100px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    border-radius: 20px;
+    background:#f0f0f7;
+    color:var(--primary-font-color);
+}
+
+.profile-options::before {
+    position:absolute;
+    top:0;
+    right:20%;
+    margin-top:-5px;
+    height:10px;
+    width:10px;
+    transform:rotate(45deg);
+    border:none;
+    background-color:#f0f7f7;
+    content:'';
+}
+
+.profile-options ul {
+    /* line-height: 180%; */
+    list-style: none;
+}
+
+.profile-options ul li {
+    padding:5px 7px;
+}
+
+.profile-options ul li:hover {
+    cursor: pointer;
+    background-color: #bdb7b7;
+}

@@ -21,7 +21,6 @@ class App extends Component {
 
         super();
 
-
         this.state = {
             orderSummary: {
                 totalOrderCount:0,
@@ -30,10 +29,10 @@ class App extends Component {
             },
             allOrders:[],
             allNotif: {
-                notifications:true,
+                notifications:false,
                 recievedNotification:[]
             },
-            userIsLoggedIn:false
+            userIsLoggedIn:true
         }
 
         // socket = io('http://localhost:8000/');
@@ -115,34 +114,14 @@ class App extends Component {
 
     render() {
 
-        let homeNavBar;
-        let locationName = this.props.history.location.pathname;
-
-        if(locationName != '/create-account') {
-            if(locationName === '/login' || locationName === '/create-account') {
-                homeNavBar = <HomeNavBar orderSummary={this.state.orderSummary} globalUserLoginStatus={this.state.userIsLoggedIn}
-                        allOrders={this.state.allOrders} 
-                        allNotif={this.state.allNotif}
-                        noSearchBar={true}
-                        setGlobalUserLogin={this.setGlobalUserLogin}
-                        /> 
-            }
-            else 
-                homeNavBar = <HomeNavBar orderSummary={this.state.orderSummary} globalUserLoginStatus={this.state.userIsLoggedIn}
-                        allOrders={this.state.allOrders} 
-                        allNotif={this.state.allNotif}
-                        noSearchBar={true}
-                        setGlobalUserLogin={this.setGlobalUserLogin}
-                        /> 
-        }
-
         return (
 
             <Switch>
-                {homeNavBar}
-                <Route path="/create-account">
-                    <CreateAccount />
-                </Route>
+                <HomeNavBar orderSummary={this.state.orderSummary} globalUserLoginStatus={this.state.userIsLoggedIn}
+                        allOrders={this.state.allOrders} 
+                        allNotif={this.state.allNotif}
+                        setGlobalUserLogin={this.setGlobalUserLogin}
+                        /> 
             </Switch>
         )
     }

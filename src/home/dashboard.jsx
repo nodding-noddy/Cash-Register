@@ -9,15 +9,15 @@ class DashBoard extends Component {
 
     componentDidMount() {
         document.title="Home";
-        if(!this.props.globalUserLoginStatus) {
-            this.props.history.push('/login');
-        }
-        else {
-            let svgHolder = document.querySelector('.svg-holder');
-            if(svgHolder) {
-                svgHolder.style.opacity = '0';
-            }
-        }
+        // if(!this.props.globalUserLoginStatus) {
+        //     this.props.history.push('/login');
+        // }
+        // else {
+        //     let svgHolder = document.querySelector('.svg-holder');
+        //     if(svgHolder) {
+        //         svgHolder.style.opacity = '0';
+        //     }
+        // }
     }
 
     render() {

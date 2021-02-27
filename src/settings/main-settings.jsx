@@ -4,13 +4,9 @@ import ChangeUserName from './change-username';
 import './css/main-settings.css';
 import EditMenuSettings from './edit-menu-settings';
 import {
-    BrowserRouter as Router,
     Link,
-    Switch,
-    Route,
     withRouter
 } from 'react-router-dom';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 

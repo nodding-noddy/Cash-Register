@@ -125,6 +125,26 @@ header {
     color:rgba(0, 0, 0, 0.4);
 }
 
+.autocomplete{
+    position:absolute;
+    display:none;
+    height:100px;
+    width:100%;
+    background-color:#f0f0f7;
+    color:var(--primary-font-color);
+    border-radius:8px;
+}
+
+.autocomplete ul {
+    line-height: 180%;
+    list-style: none;
+}
+
+.autocomplete li {
+    margin-left:20px;
+}
+
+
 .color-filler {
     position:absolute;
     background-color:rgba(0, 0, 0, 0.7);
@@ -272,4 +292,92 @@ header {
 .notification strong {
     font-size:1.25rem;
     margin-left:20px;
+}
+
+.burger-menu {
+    display:none;
+    cursor: pointer;
+}
+
+.burger-bars {
+    height:4px;
+    width:35px;
+    background-color: #fff;
+    margin-bottom:10px;
+    margin-right:20px;
+    transition-property: transform,opacity;
+    transition-duration: 500ms;
+}
+
+.home-bar-3 {
+    margin-bottom:0;
+}
+
+.expanded-burger-holder {
+    position: absolute;
+    right:0;
+    height:88vh;
+    overflow-y: auto;
+    transform: translateX(100%);
+    width:40vw;
+    background-color: var(--primary-color);
+    color:#fff;
+    z-index:100;
+    transition:transform .5s ease-in-out;
+}
+
+.expanded-burger {
+    margin:40px 20px;
+}
+
+.expanded-burger .burger-headings {
+    font-size:1.75rem;
+    font-weight: 500;
+    margin-bottom:10px;
+}
+
+.burger-options{
+    margin-bottom:20px;
+    border-bottom:2px solid #fff;
+}
+
+.burger-option {
+    margin-left:20px;
+}
+
+.burger-headings span {
+    margin-right:10px;
+}
+
+.burger-headings a {
+    text-decoration: none;
+    color:#fff;
+}
+
+.burger-notifications, .burger-user-options {
+    height:0;
+    width:90%;
+    overflow:hidden;
+    transition:500ms height ease-in-out;
+}
+
+.burger-headings:hover {
+    cursor:pointer;
+}
+
+.burger-notifications ul, .burger-user-options ul {
+    list-style: none;
+    margin-left:10px;
+    margin-top:10px;
+}
+
+.burger-notifications li, .burger-user-options li {
+    padding:10px 10px;
+    border-bottom: 1px solid var(--primary-font-color);
+    border-radius:4px;
+}
+
+.burger-notifications li:hover, .burger-user-options li:hover {
+    cursor:pointer;
+    background-color: var(--primary-font-color)
 }

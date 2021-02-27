@@ -45,12 +45,41 @@ body {
     }
 }
 
+@media (max-width:1500px) {
+    #header-right-nav {
+        width:15%;
+        /* background-color:magenta; */
+    }
+
+    #header-left-nav {
+        width:60%;
+    }
+
+}
+
 @media (max-width:1200px) {
 
     .svg-div {
             margin-bottom:120px;
             transform: rotate(180deg);
         }
+
+    .dashboard {
+        grid-template-areas: 'order-summary'
+                             'all-orders'
+                             'order-contents';
+        grid-template-rows: 1fr;                       
+        grid-template-columns: 1fr;
+        gap:50px;
+        height:100%;
+    }
+
+    .order-contents {
+        margin-left:0px;
+        /* margin-top:50px; */
+    }
+    
+
 }
 
 @media (max-width:1050px) {
@@ -73,9 +102,9 @@ body {
         height: 15vh;
     }
 
-    #root {
+    /* #root {
         height:100vh;
-    }
+    } */
 
     .svg-holder {
         background-color:#4424A9;
@@ -90,8 +119,26 @@ body {
         fill:#f0f7f7;
     }
 
+    .settings-side-bar {
+        width:30vw;
+    }
 }
 
+@media (max-width:900px) {
+    #header-right-nav {
+        display:none;
+    }
+
+    .burger-menu {
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .settings-side-bar {
+        width:40vw;
+    }
+}
 
 @media (max-width: 416px) {
 

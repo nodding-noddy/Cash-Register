@@ -1,6 +1,5 @@
 import React,{Component} from 'react';
-import { Switch, Route, Link, Router, withRouter } from 'react-router-dom';
-import CreateAccount from './create-account';
+import {  Link, withRouter } from 'react-router-dom';
 import './css/main-content.css';
 import SvgPattern from './svgPattern';
 
