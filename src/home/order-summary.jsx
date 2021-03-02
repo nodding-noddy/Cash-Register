@@ -10,6 +10,9 @@ class OrderSummary extends Component {
         })
     }
 
+    componentDidMount() {
+    }
+
     render() {
 
         return (

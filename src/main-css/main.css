@@ -14,12 +14,12 @@ body {
     background-color: #f7f0f0;
     /* font-family: 'Poppins', sans-serif; */
     font-family: 'Lato', sans-serif;
+    overflow-x:hidden;
 }
 
 #root {
     position:relative;
     /* height:100vh; */
-    overflow-x:hidden;
     /* border:10px solid magenta; */
     height:100vh;
 }
@@ -27,6 +27,12 @@ body {
 #footer {
     background-color: turquoise;
     margin-top:20px;
+}
+
+@media(min-width:920px) {
+    .expanded-burger-holder {
+        display:none;
+    }
 }
 
 @media (max-width: 1300px) {

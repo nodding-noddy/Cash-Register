@@ -32,7 +32,7 @@ class App extends Component {
                 notifications:false,
                 recievedNotification:[]
             },
-            userIsLoggedIn:true
+            userIsLoggedIn:false
         }
 
         // socket = io('http://localhost:8000/');
@@ -49,12 +49,16 @@ class App extends Component {
         // });
     }
 
-    setGlobalUserLogin = () => {
+    setGlobalUserLogin = (status) => {
         this.setState({
-            userIsLoggedIn:true
+            userIsLoggedIn:status
         })
 
-        this.props.history.push('/');
+        if(status)
+            this.props.history.push('/');
+        else 
+            this.props.history.push('/login');
+
     }
 
     updateAllOrdersList = (newOrderData) => {
@@ -80,7 +84,6 @@ class App extends Component {
             }
         }))
 
-        console.log('State is ',this.state.orderSummary.totalOrderCount)
     }
 
     updateTotalOrderAmount= (updatedAmount) => {

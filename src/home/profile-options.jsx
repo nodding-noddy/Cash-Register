@@ -11,7 +11,7 @@ class ProfileOptions extends Component {
                 <div className="profile-options">
                     <ul>
                         <li>Edit Profile</li>
-                        <li>Logout</li>
+                        <li onClick={this.props.handleLogout}>Logout</li>
                     </ul>
                 </div>
             </div>

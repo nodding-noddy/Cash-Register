@@ -23,11 +23,12 @@ class MainContent extends Component {
         event.preventDefault();
 
         const data = {
+            userName:'mr_momo',
             email:this.state.email,
             password:this.state.password
         }
 
-        const result = await fetch('http://localhost:8000/login', {
+        const result = await fetch('/login', {
             method:'POST',
             body:JSON.stringify(data),
             headers: {
@@ -36,10 +37,12 @@ class MainContent extends Component {
         })
         .then(response => response.json());
 
-        console.log(this.props);
+        // console.log(this.props);
 
-        if(result.reqAccepted) 
-            this.props.setGlobalUserLogin();
+        if(result.reqAccepted) {
+            console.log('The token is',result.token);
+            this.props.setGlobalUserLogin(true);
+        }
         else {
             this.setState({
                 warning:true

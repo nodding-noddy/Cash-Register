@@ -3,6 +3,8 @@
 }
 
 header {
+    position:sticky;
+    top:0;
     background-color: var(--primary-color);
     height:12vh;
     display:flex;
@@ -104,13 +106,18 @@ header {
     cursor:pointer;
 }
 
+.search-wrapper {
+    position:relative;
+    width:70%;
+}
 .search-bar {
-    position: relative;
-    width:50%;
+    width:100%;
+    background-color: #fff;
+    border-radius:8px;
+    overflow:hidden;
 }
 
 .search-bar input[type="text"] {
-    border-radius:8px;
     padding:.9em;
     border:none;
     outline:none;
@@ -125,23 +132,35 @@ header {
     color:rgba(0, 0, 0, 0.4);
 }
 
-.autocomplete{
-    position:absolute;
+/* .autocomplete{
     display:none;
     height:100px;
     width:100%;
-    background-color:#f0f0f7;
+    background-color:#fff;
     color:var(--primary-font-color);
-    border-radius:8px;
-}
+    border-bottom-left-radius:8px;
+    border-bottom-right-radius:8px;
+} */
 
-.autocomplete ul {
-    line-height: 180%;
+.autocomplete-ul {
+    /* display:block; */
+    display:none;
+    position:absolute;
+    border-radius: 8px;
+    margin-top:7px;
     list-style: none;
+    width:100%;
+    background-color: #fff;
+    color:black;
 }
 
-.autocomplete li {
-    margin-left:20px;
+.autocomplete-ul li {
+    padding:12px;
+    border-bottom:1px solid rgba(128, 128, 128,0.4);
+}
+
+.autocomplete-ul li:last-child {
+    border-bottom:none;
 }
 
 
@@ -380,4 +399,10 @@ header {
 .burger-notifications li:hover, .burger-user-options li:hover {
     cursor:pointer;
     background-color: var(--primary-font-color)
+}
+
+.suggestion {
+    /* background-color:blue; */
+    display:flex;
+    justify-content: space-between;
 }

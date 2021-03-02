@@ -47,6 +47,10 @@ class HomeNavBar extends Component {
     //     }
     // }
 
+    handleLogout = () => {
+        this.props.setGlobalUserLogin(false);
+    }
+
 
     handleNotifClick = () =>  {
 
@@ -75,7 +79,7 @@ class HomeNavBar extends Component {
     }
 
     activateAutoComplete = () => {
-        let autoComplete = document.querySelector('.autocomplete');
+        let autoComplete = document.querySelector('.autocomplete-ul');
         autoComplete.style.display = 'block';
     }
 
@@ -101,7 +105,7 @@ class HomeNavBar extends Component {
     }
 
     handleBurgerNotifications = () => {
-        let burgerNotificationHolder = document.querySelector('.burger-notification-holder');
+        // let burgerNotificationHolder = document.querySelector('.burger-notification-holder');
         let burgerNotifications = document.querySelector('.burger-notifications');
 
         if(burgerNotifications.style.height === '400px') 
@@ -142,26 +146,20 @@ class HomeNavBar extends Component {
     render() {
         let searchBar;
         let rightNav;
-        let locationName = this.props.history.location.pathname;
 
             if(this.props.globalUserLoginStatus) {
             searchBar =  
-                            <div className="search-bar" >
-                                <span id="search-icon"><FontAwesomeIcon icon={faSearch} /></span>
-                                <input type="text" onKeyUp={this.activateAutoComplete} name="search-bar" placeholder="Search about orders..." id="search"/>
-                                <div className="autocomplete">
-                                    <ul>
-                                        <li>Suggestion</li>
-                                        <hr/>
-                                        <li>Suggestion</li>
-                                        <hr/>
-                                        <li>Suggestion</li>
-                                        <hr/>
-                                        <li>Suggestion</li>
-                                        <hr/>
-                                        <li>Suggestion</li>
-                                        <hr/>
-                                    </ul>
+                            <div className="search-wrapper">
+                                <div className="search-bar" >
+                                    <span id="search-icon"><FontAwesomeIcon icon={faSearch} /></span>
+                                    <input type="text" name="search-bar" placeholder="Search about orders here..." id="search"/>
+                                        <ul className="autocomplete-ul">
+                                            <li> <div className="suggestion">Suggestion<div className="order-status"><strong>Done</strong></div></div> </li>
+                                            <li> <div className="suggestion">Suggestion<div className="order-status"><strong>Done</strong></div></div> </li>
+                                            <li> <div className="suggestion">Suggestion<div className="order-status"><strong>Completed</strong></div></div> </li>
+                                            <li> <div className="suggestion">Suggestion<div className="order-status"><strong>Done</strong></div></div> </li>
+                                            <li> <div className="suggestion">Suggestion<div className="order-status"><strong>Pending</strong></div></div> </li>
+                                        </ul>
                                 </div>
                             </div>
 
@@ -180,7 +178,7 @@ class HomeNavBar extends Component {
                                 <span><FontAwesomeIcon icon={faUser} /></span>
                             </div>
                             <AllNotifications allNotif={this.props.allNotif}/>
-                            <ProfileOptions />
+                            <ProfileOptions handleLogout={this.handleLogout} />
                         </nav>
         }
 
@@ -206,7 +204,7 @@ class HomeNavBar extends Component {
                     </header>
                     <nav id="lower-nav">
                         <div className="lower-navigation">
-                        <Link to="/">Home</Link>
+                            <Link to="/">Home</Link>
                             <a href="https://www.google.com">About Us</a>
                             <a href="https://www.google.com">Contact Us</a>
                             <a href="https://www.google.com">Support</a>
@@ -236,7 +234,7 @@ class HomeNavBar extends Component {
                                 <div className="burger-user-options">
                                     <ul>
                                         <li>Edit profile</li>
-                                        <li>Logout</li>
+                                        <li onClick={this.handleLogout}>Logout</li>
                                     </ul>
                                 </div>
                             </div>
