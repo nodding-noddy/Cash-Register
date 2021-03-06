@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 
 class CurrentMenuItems extends Component {
 
+
     render() {
-        
+        let menuItems = this.props.menuItems;
+
         return (
 
             <div className="current-menu-items">

@@ -40,8 +40,7 @@ class MainContent extends Component {
         // console.log(this.props);
 
         if(result.reqAccepted) {
-            console.log('The token is',result.token);
-            this.props.setGlobalUserLogin(true);
+            this.props.setGlobalUserLogin(result);
         }
         else {
             this.setState({

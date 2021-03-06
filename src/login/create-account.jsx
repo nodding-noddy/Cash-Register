@@ -109,15 +109,15 @@ class CreateAccount extends Component {
                     <div className="form">
                         <form onSubmit={(e) => this.createAccount(e)}>
                             <label htmlFor="firstName" className="login-label">First Name</label>
-                            <input onChange={(e) => this.setInputState(e)} required className="login-input" id="first-name" placeholder="Enter your first name" type="text" name="firstName" id=""/>
+                            <input onChange={(e) => this.setInputState(e)} required className="login-input" id="first-name" placeholder="Enter your first name" type="text" name="firstName" />
                             <label htmlFor="lastName" className="login-label">Last Name</label>
-                            <input onChange={(e) => this.setInputState(e)} required className="login-input" id={"last-name"} placeholder="Enter your last name" type="text" name="lastName" id=""/>
+                            <input onChange={(e) => this.setInputState(e)} required className="login-input" id={"last-name"} placeholder="Enter your last name" type="text" name="lastName" />
                             <label htmlFor="email" className="login-label">Email</label>
-                            <input onChange={(e) => this.setInputState(e)} required className="login-input" id="email-addr" placeholder="Enter your email" type="email" name="email" id=""/>
+                            <input onChange={(e) => this.setInputState(e)} required className="login-input" id="email-addr" placeholder="Enter your email" type="email" name="email" />
                             <label htmlFor="pwd" className="login-label">Password</label>
-                            <input onChange={(e) => this.setInputState(e)} required className="login-input" id="password-1" type="password" placeholder="Create a password" name="password" id=""/>
+                            <input onChange={(e) => this.setInputState(e)} required className="login-input" id="password-1" type="password" placeholder="Create a password" name="password" />
                             <label htmlFor="pwd" className="login-label">Confirm Password</label>
-                            <input onChange={(e) => this.setInputState(e)} required className="login-input" id="password-2" type="password" placeholder="Create a password" name="confirmedPassword" id=""/>
+                            <input onChange={(e) => this.setInputState(e)} required className="login-input" id="password-2" type="password" placeholder="Create a password" name="confirmedPassword" />
                             <label htmlFor="gender" className="login-label">Gender</label>
                             <select onChange={(e) => this.setInputState(e)} value={this.state.gender} id="select-gender" required className="login-input" name="gender">
                                 <option value="m" selected>Male</option>
@@ -125,7 +125,7 @@ class CreateAccount extends Component {
                                 <option value="o">Other</option>
                             </select>
                             <label htmlFor="dateOfBirth" className="login-label">Date of birth</label>
-                            <input  onChange={(e) => this.setInputState(e)} required className="login-input" id="date-of-birth" type="date" name="dateOfBirth" id=""/>
+                            <input  onChange={(e) => this.setInputState(e)} required className="login-input" id="date-of-birth" type="date" name="dateOfBirth" />
                             <input className="login-submit" type="submit"/>
                             <Link to="/login">Already have an account? login</Link>
                         </form>

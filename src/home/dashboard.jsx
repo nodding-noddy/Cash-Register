@@ -8,6 +8,9 @@ import { withRouter } from 'react-router-dom';
 class DashBoard extends Component {
 
     componentDidMount() {
+        this.props.menuItems.forEach(item => {
+            console.log(item);
+        })
         document.title="Home";
         if(!this.props.globalUserLoginStatus) {
             this.props.history.push('/login');
@@ -28,7 +31,7 @@ class DashBoard extends Component {
                 <div className="dashboard m-t-50">
                     <OrderSummary orderSummary={this.props.orderSummary}
                     updateTotalOrderCount={this.props.updateTotalOrderCount} />
-                    <AllOrders />
+                    <AllOrders allOrders={this.props.allOrders} />
                     <OrderContents />
                 </div>
             </React.Fragment>

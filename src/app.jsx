@@ -11,11 +11,12 @@ import {
      Route,
     } from 'react-router-dom';
 import CreateAccount from './login/create-account'
+import { UserProvider } from './context/userContext';
 
 let socket;
+let appConfiguration;
 
 class App extends Component {
-
 
     constructor() {
 
@@ -28,11 +29,14 @@ class App extends Component {
                 totalOrderServed:0,
             },
             allOrders:[],
+            menu:[],
             allNotif: {
                 notifications:false,
                 recievedNotification:[]
             },
-            userIsLoggedIn:false
+            userIsLoggedIn:true,
+            userId:'',
+            selectedOrder: {}
         }
 
         // socket = io('http://localhost:8000/');
@@ -40,41 +44,86 @@ class App extends Component {
 
 
     componentDidMount() {
-        // socket.emit('get-init-notif');
-        // socket.on('recieved-init-notif',(initNotif) => { this.showInitNotif(initNotif) });
-        // socket.on('order placed', (totalAmount, newOrder) => {
-        //     this.updateTotalOrderCount();
-        //     this.updateTotalOrderAmount(totalAmount);
-        //     this.updateAllOrdersList(newOrder);
+        // socket.on('initial-config',(configuration) => {
+        //     appConfiguration = configuration;
+        // });
+
+        // socket.on('new order', (orderDetails) => {
+        //     // this.updateTotalOrderCount();
+        //     // this.updateTotalOrderAmount(totalAmount);
+        //     this.showNewNotification(orderDetails.tableNumber);
+
+        //     this.updateAllOrdersList(orderDetails);
+
         // });
     }
+    setGlobalUserLogin = (globalUserData) => {
 
-    setGlobalUserLogin = (status) => {
-        this.setState({
-            userIsLoggedIn:status
-        })
+        if(globalUserData.reqAccepted) {
+            this.setState({
+                userIsLoggedIn:globalUserData.reqAccepted
+            });
+            this.setState({
+                userId:globalUserData.userId
+            })
 
-        if(status)
+            this.setState({
+                menu:[...globalUserData.menu]
+            })
             this.props.history.push('/');
+        }
         else 
             this.props.history.push('/login');
 
     }
 
     updateAllOrdersList = (newOrderData) => {
-        let tableBody = document.querySelector('tbody');
-        let newOrder = document.createElement('tr');
-        newOrder.innerHTML = `
-            <td>${newOrderData.items}</td>
-            <td>${newOrderData.time}</td>
-            <td>${newOrderData.customerName}</td>
-            <td><div className="pending order-status"><strong>${newOrderData.status}</strong></div>}</td>
-        `
-        tableBody.prepend(newOrder);
+        // let tableBody = document.querySelector('tbody');
+        // let newOrder = document.createElement('tr');
+        // newOrder.setAttribute('name',newOrderData.tableNumber);
+        // newOrder.addEventListener('click', e => this.showOrderContents(e));
+        // newOrder.innerHTML = `
+        //     <td>${newOrderData.totalItems.length}</td>
+        //     <td>${newOrderData.time}</td>
+        //     <td>${newOrderData.customerName}</td>
+        //     <td><div className="pending order-status"><strong>${newOrderData.status}</strong></div>}</td>
+        // `
+        // tableBody.prepend(newOrder);
         
+        // this.setState(prevState => ({
+        //     allOrders:[...prevState.allOrders, newOrder]
+        // }))
         this.setState(prevState => ({
-            allOrders:[...prevState.allOrders, newOrder]
+            allOrders:[newOrderData,...prevState.allOrders]
         }))
+    }
+
+    showOrderContents = (event) => {
+        const tableNumber = event.target.name;
+        const order = this.state.allOrders.find(element => element.tableNumber === tableNumber) ;
+        let OrderContents = document.querySelector('.order-contents-details');
+        let orderDetails = document.createElement('div');
+        orderDetails.className = 'order-details';
+        orderDetails.innerHTML = `
+                        <div className="customer-details customer-name"><strong>Name: </strong>${order.customerName}</div>
+                        <div className="customer-details customer-mobile-no"><strong>Mobile: </strong>${order.phoneNumber}</div>
+                        <div className="customer-details order-table-no"><strong>Table Number: </strong>${tableNumber}</div>`;
+
+        let orderList = document.createElement('div');
+        orderList.className = 'order-list';
+        order.items.forEach(item => {
+            let orderImageHolder = document.createElement('div');
+            orderImageHolder.innerHTML = `
+                                <div className="order-img-and-title">
+                                <div className="order-image m-t-20">
+                                    <img src="http://localhost:8000/images?itemName=${item.title}" alt="item image"/> 
+                                    </div>
+                                    <span className="order-img-description"> <strong>${item.title}</strong> </span>
+                                </div>
+                                <div className="quantity">
+                                    <strong>Qty.</strong> ${item.quantity}
+                                </div>`
+        })
     }
 
     updateTotalOrderCount = (updatedCount) => {
@@ -102,17 +151,15 @@ class App extends Component {
         }))
     }
 
-    showInitNotif = (initNotif) => {
-        initNotif.forEach(notif => {
-            let newDiv;
-            newDiv = <div className="notification">
-                        <FontAwesomeIcon icon={faPlus} />
-                       <strong>{notif}</strong> 
-                    </div>
-            this.setState(prevState => ({
-                allNotif: {...prevState.allNotif,recievedNotification:[...prevState.allNotif.recievedNotification, newDiv]}
-            }))
-        })
+    showNewNotification = (tableNumber) => {
+        let newDiv;
+        newDiv = <div className="notification">
+                    <FontAwesomeIcon icon={faPlus} />
+                    <strong>A new order has been placed at {tableNumber}</strong> 
+                </div>
+        this.setState(prevState => ({
+            allNotif: {...prevState.allNotif,recievedNotification:[...prevState.allNotif.recievedNotification, newDiv]}
+        }));
     }
 
     render() {
@@ -124,6 +171,9 @@ class App extends Component {
                         allOrders={this.state.allOrders} 
                         allNotif={this.state.allNotif}
                         setGlobalUserLogin={this.setGlobalUserLogin}
+                        // menuItems={appConfiguration}
+                        menuItems={this.state.menu}
+                        userId={this.state.userId}
                         /> 
             </Switch>
         )

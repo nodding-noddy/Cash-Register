@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHandPointLeft } from '@fortawesome/free-solid-svg-icons'
+import { socket } from '../app';
 
 class OrderContents extends Component {
 
@@ -11,6 +12,15 @@ class OrderContents extends Component {
         }
     }
 
+
+    confirmOrder = (event) => {
+        // const name = event.target.name;
+        // if(name === 'order-accepted') {
+        //     socket.emit('order confirmation', tableNumber, true);
+        // }
+        // else 
+        //     socket.emit('order confirmation', tableNumber, false);
+    }
 
     render() {
 
@@ -85,8 +95,8 @@ class OrderContents extends Component {
                         </div>
                         <div className="accept-decline-order">
                             <div className="buttons">
-                                <button className="accept-decline-button accept" type="button"> <strong>Accept</strong> </button>
-                                <button className="accept-decline-button decline" type="button"><strong>Decline</strong></button>
+                                <button className="accept-decline-button accept" name="order-accpeted" onClick={e => this.confirmOrder(e)} type="button"> <strong>Accept</strong> </button>
+                                <button className="accept-decline-button decline" name="order-declined" onClick={e => this.confirmOrder(e)} type="button"><strong>Decline</strong></button>
                             </div>
                         </div>
                     </div>
