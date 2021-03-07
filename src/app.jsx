@@ -34,7 +34,7 @@ class App extends Component {
                 notifications:false,
                 recievedNotification:[]
             },
-            userIsLoggedIn:true,
+            userIsLoggedIn:false,
             userId:'',
             selectedOrder: {}
         }

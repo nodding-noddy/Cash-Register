@@ -15,13 +15,13 @@ class EditMenuSettings extends Component {
                 <div className="current-menu-section">
                    <div className="current-menu">
                         <h1>Current Menu</h1>
-                        <CurrentMenuItems menuItems={this.props.menuItems} />
+                        <CurrentMenuItems menuItems={this.props.menuItems} userId={this.props.userId} />
                     </div> 
                 </div>
                 <div className="add-items-section">
                     <div className="add-items">
                         <h1>Add items to the Menu</h1>
-                        <AddItems />
+                        <AddItems  userId={this.props.userId} />
                     </div>
                 </div>
             </div>

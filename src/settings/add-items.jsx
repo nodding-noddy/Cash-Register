@@ -27,8 +27,9 @@ class AddItems extends Component {
         let formData = new FormData();
         formData.append('itemTitle', this.state.addedItemTitle);
         formData.append('itemAmount', this.state.addedItemAmount);
-        formData.append('ItemDescription', this.state.addedItemDescription);
+        formData.append('itemDescription', this.state.addedItemDescription);
         formData.append('itemImage', uploadedImage);
+        formData.append('userId', this.props.userId);
         const result = await fetch('http://localhost:8080/upload-menu-item', {
             method:'POST',
             body:formData,
@@ -81,8 +82,8 @@ class AddItems extends Component {
                         <input onChange={this.setInputState} className="input-text" type="text" name="addedItemTitle" id="new-item-title" placeholder="Enter item title"/>
                         <label className="settings-labels" htmlFor="addedItemAmount"> <strong>Item Amount</strong> </label>
                         <input onChange={this.setInputState} className="input-text" type="text" name="addedItemAmount" id="new-item-amount" placeholder="Enter item amount"/>
-                        <label className="settings-labels" htmlFor="added-item-desc-label">Item description</label>
-                        <textarea onChange={this.setInputState} name="addedItemDescription" id="added-item-description" cols="40" rows="5"></textarea>
+                        <label className="settings-labels" htmlFor="addedItemDescription">Item description</label>
+                        <textarea onChange={this.setInputState} name="addedItemDescription" placeholder="Enter item description" id="added-item-description" cols="40" rows="5"></textarea>
                         <input className="submit" type="submit" value="Add item"/>
                     </form>
                 </div>

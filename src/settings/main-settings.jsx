@@ -67,13 +67,13 @@ class Settings extends Component {
         let editMenu; 
 
         if(this.state.changeUserName) 
-            changeUserName = <ChangeUserName />
+            changeUserName = <ChangeUserName userId={this.props.userId} />
 
         if(this.state.changePassword)
-            changePassword = <ChangePassword />
+            changePassword = <ChangePassword userId={this.props.userId}  />
 
         if(this.state.editMenu)
-            editMenu = <EditMenuSettings />
+            editMenu = <EditMenuSettings userId={this.props.userId} />
 
         return (
                 <div className="settings-container">
