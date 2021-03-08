@@ -36,7 +36,8 @@ class App extends Component {
             },
             userIsLoggedIn:false,
             userId:'',
-            selectedOrder: {}
+            selectedOrder: {},
+            token:''
         }
 
         // socket = io('http://localhost:8000/');
@@ -70,11 +71,32 @@ class App extends Component {
             this.setState({
                 menu:[...globalUserData.menu]
             })
+            this.setState({
+                token:globalUserData.token
+            })
+            
+            const token = globalUserData.token;
+
+            socket = io('http://localhost:8080', {
+                query:{token} 
+            });
+
+            
+            socket.emit('restro connection');
+
             this.props.history.push('/');
         }
         else 
             this.props.history.push('/login');
 
+    }
+
+    addOrder = (newOrder) => {
+        this.setState(prevState => ({
+            allOrders:[...prevState.allOrders,newOrder]
+        }))
+
+        console.log('All orders', this.state.allOrders);
     }
 
     updateAllOrdersList = (newOrderData) => {
@@ -174,6 +196,7 @@ class App extends Component {
                         // menuItems={appConfiguration}
                         menuItems={this.state.menu}
                         userId={this.state.userId}
+                        addOrder={this.addOrder}
                         /> 
             </Switch>
         )

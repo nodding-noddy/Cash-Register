@@ -249,7 +249,8 @@ class HomeNavBar extends Component {
                         <Switch location={this.props.history.location}>
                             <Route path="/" exact>
                                 <DashBoard orderSummary={this.props.orderSummary} globalUserLoginStatus={this.props.globalUserLoginStatus}
-                                allOrder={this.props.allOrders} userId={this.props.userId} menuItems={this.props.menuItems} />
+                                allOrder={this.props.allOrders} userId={this.props.userId} menuItems={this.props.menuItems} 
+                                addOrder={this.props.addOrder}/>
                             </Route>
                             <Route path="/settings">
                                 <Settings menuItems={this.props.menuItems}  globalUserLoginStatus={this.props.globalUserLoginStatus}

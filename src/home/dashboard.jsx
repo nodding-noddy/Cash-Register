@@ -4,6 +4,7 @@ import AllOrders from './all-orders';
 import OrderSummary from './order-summary';
 import OrderContents from './order-contents';
 import { withRouter } from 'react-router-dom';
+import { socket } from '../app';
 
 class DashBoard extends Component {
 
@@ -16,6 +17,9 @@ class DashBoard extends Component {
             this.props.history.push('/login');
         }
         else {
+            socket.on('new order', (orderDetails) => {
+                this.props.addOrder(orderDetails);
+            })
             let svgHolder = document.querySelector('.svg-holder');
             if(svgHolder) {
                 svgHolder.style.opacity = '0';
