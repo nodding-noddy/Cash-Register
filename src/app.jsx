@@ -30,14 +30,13 @@ class App extends Component {
             },
             allOrders:[],
             menu:[],
-            allNotif: {
-                notifications:false,
-                recievedNotification:[]
-            },
+            allNotif: [],
+            newNotification:false,
             userIsLoggedIn:false,
             userId:'',
-            selectedOrder: {},
-            token:''
+            selectedOrder: [],
+            token:'',
+            orderContents:false,
         }
 
         // socket = io('http://localhost:8000/');
@@ -45,6 +44,20 @@ class App extends Component {
 
 
     componentDidMount() {
+        let recoveredState = localStorage.getItem('reactState');
+        if(recoveredState) {
+            recoveredState = JSON.parse(recoveredState);
+            this.setState({...recoveredState});
+            if(recoveredState.userIsLoggedIn) {
+                const token = recoveredState.token;
+                socket = io('http://localhost:8080', {
+                    query:{token} 
+                });
+                socket.emit('restro connection');
+                this.props.history.push('/');
+            }
+        }
+
         // socket.on('initial-config',(configuration) => {
         //     appConfiguration = configuration;
         // });
@@ -93,10 +106,21 @@ class App extends Component {
 
     addOrder = (newOrder) => {
         this.setState(prevState => ({
-            allOrders:[...prevState.allOrders,newOrder]
+            allOrders:[newOrder,...prevState.allOrders]
         }))
 
-        console.log('All orders', this.state.allOrders);
+        this.updateTotalOrderCount();
+
+        let newAmount = 0;
+
+        newOrder.items.forEach(item => {
+            newAmount += item.totalAmount
+        })
+
+        this.updateTotalOrderAmount(newAmount);
+
+        this.setLocalStorage();
+
     }
 
     updateAllOrdersList = (newOrderData) => {
@@ -118,6 +142,18 @@ class App extends Component {
         this.setState(prevState => ({
             allOrders:[newOrderData,...prevState.allOrders]
         }))
+    }
+
+    setCurrentlySelectedOrder = (order) => {
+        console.log('Local',localStorage.getItem('reactState'));
+        this.setState({
+            selectedOrder:order
+        })
+        if(!this.state.orderContents) {
+            this.setState({
+                orderContents:true
+            })
+        }
     }
 
     showOrderContents = (event) => {
@@ -173,17 +209,40 @@ class App extends Component {
         }))
     }
 
-    showNewNotification = (tableNumber) => {
-        let newDiv;
-        newDiv = <div className="notification">
-                    <FontAwesomeIcon icon={faPlus} />
-                    <strong>A new order has been placed at {tableNumber}</strong> 
-                </div>
+    showNewNotification = (orderNumber) => {
+        // let newDiv;
+        // newDiv = <div className="notification">
+        //             <FontAwesomeIcon icon={faPlus} />
+        //             <strong>A new order has been placed at {tableNumber}</strong> 
+        //         </div>
         this.setState(prevState => ({
-            allNotif: {...prevState.allNotif,recievedNotification:[...prevState.allNotif.recievedNotification, newDiv]}
+            allNotif:[orderNumber, ...prevState.allNotif]
         }));
+
+        this.setState({
+            newNotification:true
+        })
+
+        // this.setState(prevState => ({
+        //     allNotif: {...prevState.allNotif,recievedNotification:[...prevState.allNotif.recievedNotification, newDiv]}
+     // }));
     }
 
+    turnOffNewNotif = () => {
+        this.setState({
+            newNotification:false
+        })
+    }
+
+    setLocalStorage = () => {
+        localStorage.setItem('reactState',JSON.stringify(this.state));
+    }
+
+    reloadPrevState = () => {
+        let recoveredState = localStorage.getItem('reactState');
+        recoveredState = JSON.parse(recoveredState);
+        this.setState({...recoveredState});
+    }
     render() {
 
         return (
@@ -197,6 +256,14 @@ class App extends Component {
                         menuItems={this.state.menu}
                         userId={this.state.userId}
                         addOrder={this.addOrder}
+                        setCurrentlySelectedOrder={this.setCurrentlySelectedOrder}
+                        selectedOrder={this.state.selectedOrder}
+                        orderContents={this.state.orderContents}
+                        newNotification={this.state.newNotification}
+                        allNotif={this.state.allNotif}
+                        showNewNotification={this.showNewNotification}
+                        turnOffNewNotif={this.turnOffNewNotif}
+                        reloadPrevState={this.reloadPrevState}
                         /> 
             </Switch>
         )

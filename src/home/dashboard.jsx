@@ -9,16 +9,16 @@ import { socket } from '../app';
 class DashBoard extends Component {
 
     componentDidMount() {
-        this.props.menuItems.forEach(item => {
-            console.log(item);
-        })
         document.title="Home";
+        console.log('Local Dash', localStorage.getItem('reactState'));
         if(!this.props.globalUserLoginStatus) {
             this.props.history.push('/login');
         }
         else {
+            this.props.reloadPrevState();
             socket.on('new order', (orderDetails) => {
                 this.props.addOrder(orderDetails);
+                this.props.showNewNotification(orderDetails.orderNumber);
             })
             let svgHolder = document.querySelector('.svg-holder');
             if(svgHolder) {
@@ -35,8 +35,11 @@ class DashBoard extends Component {
                 <div className="dashboard m-t-50">
                     <OrderSummary orderSummary={this.props.orderSummary}
                     updateTotalOrderCount={this.props.updateTotalOrderCount} />
-                    <AllOrders allOrders={this.props.allOrders} />
-                    <OrderContents />
+                    <AllOrders allOrders={this.props.allOrders}
+                    setCurrentlySelectedOrder={this.props.setCurrentlySelectedOrder} />
+                    <OrderContents selectedOrder={this.props.selectedOrder}
+                    orderContents={this.props.orderContents} 
+                    userId={this.props.userId}/>
                 </div>
             </React.Fragment>
         )

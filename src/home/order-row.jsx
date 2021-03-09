@@ -7,12 +7,14 @@ class OrderRow extends Component {
         let orderData = this.props.orderData;
 
         return(
-            <tr name={orderData.orderId}>
-                <td>{orderData.quantity}</td>
-                <td>{orderData.time}</td>
+            <tr onClick={() => this.props.setCurrentlySelectedOrder(orderData)} name={orderData.orderNumber}>
+                <td>{orderData.items.length}</td>
+                <td>{new Date().toLocaleTimeString()}</td>
                 <td>{orderData.customerName}</td>
-                <td><div className="pending order-status"> <strong>{orderData.status}</strong> </div></td>
+                <td><div className="pending order-status"> <strong>Pending</strong> </div></td>
             </tr>
         )
     }
 }
+
+export default OrderRow;

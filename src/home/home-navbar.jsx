@@ -33,8 +33,7 @@ class HomeNavBar extends Component {
     constructor() {
         super();
         this.state = {
-            // clicked:false,
-            userIsLoggedIn:true
+            notificationsRead:true
         }
     }
 
@@ -53,6 +52,8 @@ class HomeNavBar extends Component {
 
 
     handleNotifClick = () =>  {
+    
+    this.props.turnOffNewNotif();
 
     let notificationContainer = document.querySelector('.notifications-container');
     let allNotifications = document.querySelector('.all-notifications');
@@ -146,6 +147,12 @@ class HomeNavBar extends Component {
     render() {
         let searchBar;
         let rightNav;
+        let newNotif;
+
+        if(this.props.newNotification) {
+            newNotif = <div className="new-notif"></div>
+        }
+
 
             if(this.props.globalUserLoginStatus) {
             searchBar =  
@@ -167,6 +174,7 @@ class HomeNavBar extends Component {
                         <nav id="header-right-nav">
                             <div onClick={this.handleNotifClick} className="notifications notif-set pointer">
                                 <div className="color-filler"></div>
+                                {newNotif}
                                 <span><FontAwesomeIcon icon={faBell} /></span>
                             </div>
                             <div className="settings notif-set pointer">
@@ -249,8 +257,13 @@ class HomeNavBar extends Component {
                         <Switch location={this.props.history.location}>
                             <Route path="/" exact>
                                 <DashBoard orderSummary={this.props.orderSummary} globalUserLoginStatus={this.props.globalUserLoginStatus}
-                                allOrder={this.props.allOrders} userId={this.props.userId} menuItems={this.props.menuItems} 
-                                addOrder={this.props.addOrder}/>
+                                allOrders={this.props.allOrders} userId={this.props.userId} menuItems={this.props.menuItems} 
+                                addOrder={this.props.addOrder} 
+                                setCurrentlySelectedOrder={this.props.setCurrentlySelectedOrder}
+                                selectedOrder={this.props.selectedOrder}
+                                orderContents={this.props.orderContents}
+                                showNewNotification={this.props.showNewNotification}
+                                reloadPrevState={this.props.reloadPrevState}/>
                             </Route>
                             <Route path="/settings">
                                 <Settings menuItems={this.props.menuItems}  globalUserLoginStatus={this.props.globalUserLoginStatus}

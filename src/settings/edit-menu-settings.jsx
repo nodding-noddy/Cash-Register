@@ -15,7 +15,7 @@ class EditMenuSettings extends Component {
                 <div className="current-menu-section">
                    <div className="current-menu">
                         <h1>Current Menu</h1>
-                        <CurrentMenuItems menuItems={this.props.menuItems} userId={this.props.userId} />
+                        <CurrentMenuItems menuItems={this.props.menu} userId={this.props.userId} />
                     </div> 
                 </div>
                 <div className="add-items-section">

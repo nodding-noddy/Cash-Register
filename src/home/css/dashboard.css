@@ -104,6 +104,9 @@ thead th {
     background-color:#f0f0f7;
     text-align: left;
 }
+table tr:hover {
+    cursor:pointer;
+}
 
 table th, table tbody tr td {
     padding: 20px 20px 20px 0;

@@ -15,7 +15,6 @@ class MainContent extends Component {
     }
 
     componentDidMount() {
-        console.log('The location is',this.props.history.location.pathname);
         document.title = "Cash Register - Login";
     }
 

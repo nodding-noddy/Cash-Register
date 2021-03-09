@@ -1,20 +1,16 @@
 import { faCookieBite } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, {Component} from 'react';
+import OrderRow from './order-row';
 
 class AllOrders extends Component {
 
-    constructor() {
-        super();
-        this.state = {
-            orders:true
-        }
-    }
-
     render() {
+
+        let allOrderData = [...this.props.allOrders];
         
         let noOrders;
-        if(!this.state.orders) {
+        if(this.props.allOrders.length === 0) {
             noOrders = <div className="no-orders">
                             <FontAwesomeIcon icon={faCookieBite} size="5x" />
                             <br/>
@@ -36,7 +32,16 @@ class AllOrders extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                {allOrderData.map((order,index) => {
+                                    return <OrderRow setCurrentlySelectedOrder={this.props.setCurrentlySelectedOrder} key={order.orderNumber} orderData={order} />
+                                    // <tr key={order.orderNumber}>
+                                    //     <td>{order.items.length}</td>
+                                    //     <td>19:00</td>
+                                    //     <td>{order.customerName}</td>
+                                    //     <td><div className="pending order-status"> <strong>Pending</strong> </div></td>
+                                    // </tr>
+                                })}
+                                {/* <tr>
                                     <td>2</td>
                                     <td>19.58</td>
                                     <td>Shubh</td>
@@ -89,7 +94,7 @@ class AllOrders extends Component {
                                     <td>19.58</td>
                                     <td>Shubh</td>
                                     <td><div className="pending order-status"> <strong>Pending</strong> </div></td>
-                                </tr>
+                                </tr> */}
                             </tbody>
                         </table>
                         {noOrders}
