@@ -414,3 +414,7 @@ header {
     display:flex;
     justify-content: space-between;
 }
+
+.suggestion-li:hover {
+    cursor: pointer;
+}

@@ -37,6 +37,9 @@ class App extends Component {
             selectedOrder: [],
             token:'',
             orderContents:false,
+            orderAccepted:false,
+            orderDeclined:false,
+            suggestions:[]
         }
 
         // socket = io('http://localhost:8000/');
@@ -86,6 +89,8 @@ class App extends Component {
             })
             this.setState({
                 token:globalUserData.token
+            }, () => {
+                localStorage.setItem('reactState',JSON.stringify(this.state));
             })
             
             const token = globalUserData.token;
@@ -99,8 +104,14 @@ class App extends Component {
 
             this.props.history.push('/');
         }
-        else 
+        else { 
+            this.setState({
+                userIsLoggedIn:false
+            }, () => {
+                localStorage.setItem('reactState',JSON.stringify(this.state));
+            });
             this.props.history.push('/login');
+        }
 
     }
 
@@ -110,17 +121,7 @@ class App extends Component {
         }))
 
         this.updateTotalOrderCount();
-
-        let newAmount = 0;
-
-        newOrder.items.forEach(item => {
-            newAmount += item.totalAmount
-        })
-
-        this.updateTotalOrderAmount(newAmount);
-
-        this.setLocalStorage();
-
+        this.updateTotalOrderAmount(newOrder.totalAmount);
     }
 
     updateAllOrdersList = (newOrderData) => {
@@ -145,7 +146,14 @@ class App extends Component {
     }
 
     setCurrentlySelectedOrder = (order) => {
-        console.log('Local',localStorage.getItem('reactState'));
+        console.log(order);
+        this.setState({
+            orderAccepted:false
+        })
+        this.setState({
+            orderDeclined:false
+        })
+
         this.setState({
             selectedOrder:order
         })
@@ -198,7 +206,9 @@ class App extends Component {
             orderSummary: {
                 ...prevState.orderSummary, totalOrderAmount:prevState.orderSummary.totalOrderAmount + updatedAmount
             }
-        }))
+        }),() => {
+            localStorage.setItem('reactState',JSON.stringify(this.state));
+        });
     }
 
     updateTotalOrderServed = (updatedCount) => {
@@ -241,8 +251,119 @@ class App extends Component {
     reloadPrevState = () => {
         let recoveredState = localStorage.getItem('reactState');
         recoveredState = JSON.parse(recoveredState);
-        this.setState({...recoveredState});
+        if(recoveredState) {
+            if(recoveredState.userIsLoggedIn === false) {
+                recoveredState.userIsLoggedIn = true;
+                localStorage.setItem('reactState',JSON.stringify(recoveredState));
+            }
+            this.setState({...recoveredState});
+        }
+        else {
+        }
     }
+
+    updateOrderStatus = (totalAmount, orderNumber, isConfirmed) => {
+        console.log('Deducted amt will be',totalAmount);
+        const orderArray = [...this.state.allOrders];
+        // orderNumber = orderNumber + '';
+        if(isConfirmed) {
+            this.setState({
+                orderAccepted:true
+            });
+            this.setState({
+                orderDeclined:false
+            })
+            let selectedRow;
+            for(let i = 0; i < orderArray.length; i++) {
+                if (orderArray[i].orderNumber=== orderNumber) {
+                    selectedRow = i;
+                    break;
+                }
+            }
+            let newRow = {...orderArray[selectedRow]};
+            newRow.orderStatus = 'accepted';
+            orderArray[selectedRow] = newRow;
+            this.setState({
+                allOrders:orderArray
+            }, () => {
+                localStorage.setItem('reactState', JSON.stringify(this.state));
+            })
+        }
+        else {
+            this.setState({
+                orderContents:false
+            })
+            this.setState({
+                selectedOrder:[]
+            })
+            this.setState(prevState => ({
+                orderSummary:{
+                    ...prevState.orderSummary, totalOrderAmount:prevState.orderSummary.totalOrderAmount - totalAmount
+                }
+            }));
+
+            if(this.state.orderSummary.totalOrderCount > 0) {
+                this.setState(prevState=> ({
+                    orderSummary:{
+                        ...prevState.orderSummary, totalOrderCount:prevState.orderSummary.totalOrderCount - 1
+                    }
+                }));
+            }
+
+            this.setState({
+                orderAccepted:false
+            });
+            this.setState({
+                orderDeclined:true
+            })
+            const modifiedArray = orderArray.filter(order => order.orderNumber !== orderNumber);
+            this.setState({
+                allOrders:modifiedArray
+            }, () => {
+                localStorage.setItem('reactState',JSON.stringify(this.state));
+            })
+            // let newStorage = JSON.parse(localStorage.getItem('reactState'));
+            // newStorage.allOrders = modifiedArray;
+            // newStorage.orderSummary.totalOrderAmount = newStorage.orderSummary.totalOrderAmount - totalAmount;
+            // if(this.state.orderSummary.totalOrderCount > 0) 
+            //     newStorage.orderSummary.totalOrderCount = newStorage.orderSummary.totalOrderCount - 1;
+            // localStorage.setItem('reactState',JSON.stringify(newStorage));
+        }
+    }
+
+    activateAutoComplete = (value) => {
+        let autoComplete = document.querySelector('.autocomplete-ul');
+            let newArray = this.state.allOrders.filter(order => {
+                let num = order.orderNumber + '';
+                return num.startsWith(value);
+            })
+            // newArray = newArray.map(order => {
+            //     let status;
+            //     if(order.orderStatus === 'pending') {
+            //         status = "pending";
+            //     }
+            //     else {
+            //         status="completed"
+            //     }
+            //     return `<li class="suggestion-li">
+            //                 <div class="suggestion">${order.orderNumber}<div class="order-status ${status}"><strong>${order.orderStatus}</strong></div></div>
+            //             </li>`
+
+            // });
+
+        if(newArray.length === 0 || value === '' || value === ' ') {
+            autoComplete.style.display = 'none';
+        }
+        else {
+            this.setState({
+                suggestions:newArray
+            })
+            autoComplete.style.display='block';
+            // autoComplete.innerHTML = newArray.join('');
+            // console.log(newArray);
+        }
+    }
+
     render() {
 
         return (
@@ -264,6 +385,11 @@ class App extends Component {
                         showNewNotification={this.showNewNotification}
                         turnOffNewNotif={this.turnOffNewNotif}
                         reloadPrevState={this.reloadPrevState}
+                        updateOrderStatus={this.updateOrderStatus}
+                        orderAccepted = {this.state.orderAccepted}
+                        orderDeclined = {this.state.orderDeclined}
+                        activateAutoComplete={this.activateAutoComplete}
+                        suggestions={this.state.suggestions}
                         /> 
             </Switch>
         )

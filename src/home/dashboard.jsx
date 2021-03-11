@@ -10,19 +10,24 @@ class DashBoard extends Component {
 
     componentDidMount() {
         document.title="Home";
-        console.log('Local Dash', localStorage.getItem('reactState'));
         if(!this.props.globalUserLoginStatus) {
             this.props.history.push('/login');
         }
         else {
-            this.props.reloadPrevState();
-            socket.on('new order', (orderDetails) => {
-                this.props.addOrder(orderDetails);
-                this.props.showNewNotification(orderDetails.orderNumber);
-            })
-            let svgHolder = document.querySelector('.svg-holder');
-            if(svgHolder) {
-                svgHolder.style.opacity = '0';
+            if(new Date().toLocaleDateString().slice(0,2) === localStorage.getItem('crDate')) { 
+                this.props.reloadPrevState();
+                socket.on('new order', (orderDetails) => {
+                    this.props.addOrder(orderDetails);
+                    this.props.showNewNotification(orderDetails.orderNumber);
+                })
+                let svgHolder = document.querySelector('.svg-holder');
+                if(svgHolder) {
+                    svgHolder.style.opacity = '0';
+                }
+            }
+            else {
+                localStorage.removeItem('reactState');
+                localStorage.setItem('crDate',new Date().toLocaleDateString().slice(0,2));
             }
         }
     }
@@ -39,7 +44,8 @@ class DashBoard extends Component {
                     setCurrentlySelectedOrder={this.props.setCurrentlySelectedOrder} />
                     <OrderContents selectedOrder={this.props.selectedOrder}
                     orderContents={this.props.orderContents} 
-                    userId={this.props.userId}/>
+                    userId={this.props.userId} updateOrderStatus={this.props.updateOrderStatus}
+                    orderAccepted={this.props.orderAccepted} orderDeclined={this.props.orderDeclined}/>
                 </div>
             </React.Fragment>
         )

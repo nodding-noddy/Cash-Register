@@ -6,12 +6,21 @@ class OrderRow extends Component {
 
         let orderData = this.props.orderData;
 
+        let orderStatus;
+
+        if(orderData.orderStatus === 'pending') {
+            orderStatus = <td><div className="pending order-status"><strong>Pending</strong></div></td>
+        }
+        else {
+            orderStatus = <td><div className="completed order-status"><strong>Accepted</strong></div></td>
+        }
+
         return(
             <tr onClick={() => this.props.setCurrentlySelectedOrder(orderData)} name={orderData.orderNumber}>
                 <td>{orderData.items.length}</td>
-                <td>{new Date().toLocaleTimeString()}</td>
+                <td>{orderData.orderTime}</td>
                 <td>{orderData.customerName}</td>
-                <td><div className="pending order-status"> <strong>Pending</strong> </div></td>
+                {orderStatus}
             </tr>
         )
     }

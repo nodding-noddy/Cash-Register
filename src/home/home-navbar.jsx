@@ -15,6 +15,9 @@ import {
 } from 'react-router-dom';
 import CreateAccount from '../login/create-account';
 import ProfileOptions from './profile-options';
+import CheckOut from './checkout';
+
+let suggestions = [];
 
 class HomeNavBar extends Component {
 
@@ -33,12 +36,12 @@ class HomeNavBar extends Component {
     constructor() {
         super();
         this.state = {
-            notificationsRead:true
+            notificationsRead:true,
+            userInput:'',
         }
     }
 
-
-    // afterTransition = () => {
+        // afterTransition = () => {
     //     let allNotif = document.querySelector('.all-notifications');
                     
     //             if(allNotif.style.display === 'block' && this.state.clicked ) {
@@ -79,19 +82,13 @@ class HomeNavBar extends Component {
         }
     }
 
-    activateAutoComplete = () => {
-        let autoComplete = document.querySelector('.autocomplete-ul');
-        autoComplete.style.display = 'block';
-    }
 
     showProfileOptions = () => {
 
         let profileOptionsContainer = document.querySelector('.profile-options-container');
         let profileOptions = document.querySelector('.profile-options');
-        console.log("PRofile",profileOptionsContainer.style.transform);
         
         if(profileOptionsContainer.style.transform === 'translate(20%, 95%)') {
-            console.log("inside if");
             profileOptions.style.display = 'block';
             profileOptionsContainer.style.opacity = '1';
 
@@ -144,6 +141,19 @@ class HomeNavBar extends Component {
         }
     }
 
+    // setUserInput = (event) => {
+
+    //     // const value = event.currentTarget.value;
+
+    //     // suggestions = this.props.allOrders.filter(order => {
+    //     //     let num = order.orderNumber + '';
+    //     //     return num.startsWith(value);
+    //     // })
+
+    //     this.props.activateAutoComplete(event.currentTarget.value);
+    //     // console.log(this.props.suggestions);
+
+    // }
     render() {
         let searchBar;
         let rightNav;
@@ -159,13 +169,26 @@ class HomeNavBar extends Component {
                             <div className="search-wrapper">
                                 <div className="search-bar" >
                                     <span id="search-icon"><FontAwesomeIcon icon={faSearch} /></span>
-                                    <input type="text" name="search-bar" placeholder="Search about orders here..." id="search"/>
+                                    <input onInput={(e) => {this.props.activateAutoComplete(e.currentTarget.value)}} type="text" name="search-bar" autoComplete="off" placeholder="Search about orders here..." id="search"/>
                                         <ul className="autocomplete-ul">
-                                            <li> <div className="suggestion">Suggestion<div className="order-status"><strong>Done</strong></div></div> </li>
+                                            {this.props.suggestions.map((suggestion, index) => {
+                                                let status;
+                                                if(suggestion.orderStatus === 'pending')
+                                                    status = 'pending';
+                                                else 
+                                                    status = 'completed';
+                                                return (<li className="suggestion-li" key={index} onClick={() => {console.log('Suggestions order number is',suggestion.orderNumber)}} ><div className="suggestion"> <Link to={{
+                                                    pathname:'/checkout',
+                                                    state:{
+                                                        details:suggestion
+                                                    }
+                                                }}>{suggestion.orderNumber}</Link><div className={`order-status ${status}`}><strong>{suggestion.orderStatus}</strong></div></div> </li>)
+                                            })}
+                                            {/* <li> <div className="suggestion">Suggestion<div className="order-status"><strong>Done</strong></div></div> </li>
                                             <li> <div className="suggestion">Suggestion<div className="order-status"><strong>Done</strong></div></div> </li>
                                             <li> <div className="suggestion">Suggestion<div className="order-status"><strong>Completed</strong></div></div> </li>
                                             <li> <div className="suggestion">Suggestion<div className="order-status"><strong>Done</strong></div></div> </li>
-                                            <li> <div className="suggestion">Suggestion<div className="order-status"><strong>Pending</strong></div></div> </li>
+                                            <li> <div className="suggestion">Suggestion<div className="order-status"><strong>Pending</strong></div></div> </li> */}
                                         </ul>
                                 </div>
                             </div>
@@ -263,7 +286,11 @@ class HomeNavBar extends Component {
                                 selectedOrder={this.props.selectedOrder}
                                 orderContents={this.props.orderContents}
                                 showNewNotification={this.props.showNewNotification}
-                                reloadPrevState={this.props.reloadPrevState}/>
+                                reloadPrevState={this.props.reloadPrevState}
+                                updateOrderStatus={this.props.updateOrderStatus}
+                                orderAccepted={this.props.orderAccepted}
+                                orderDeclined={this.props.orderDeclined}
+                                />
                             </Route>
                             <Route path="/settings">
                                 <Settings menuItems={this.props.menuItems}  globalUserLoginStatus={this.props.globalUserLoginStatus}
@@ -275,6 +302,9 @@ class HomeNavBar extends Component {
                             </Route>
                             <Route path="/create-account">
                                 <CreateAccount />
+                            </Route>
+                            <Route path="/checkout">
+                                <CheckOut />
                             </Route>
                         </Switch>
                     </CSSTransition>

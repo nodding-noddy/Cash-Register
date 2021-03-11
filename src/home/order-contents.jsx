@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHandPointLeft, faMugHot } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faCheckDouble, faCross, faHandPointLeft, faMugHot, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { socket } from '../app';
 import OrderContentsList from './order-contents-list';
 
@@ -9,12 +9,14 @@ class OrderContents extends Component {
     confirmOrder = (event) => {
         const name = event.currentTarget.name;
         const orderNumber = this.props.selectedOrder.orderNumber;
+        const totalAmount = this.props.selectedOrder.totalAmount;
 
-        console.log('Event name is',name);
         if(name === 'order-accepted') {
+            this.props.updateOrderStatus(totalAmount, orderNumber, true);
             socket.emit('order confirmation',orderNumber , true);
         }
         else {
+            this.props.updateOrderStatus(totalAmount, orderNumber, false);
             socket.emit('order confirmation', orderNumber, false);
         }
     }
@@ -26,6 +28,23 @@ class OrderContents extends Component {
 
         let orderDetails = this.props.selectedOrder;
         let orderList; 
+        let orderAcceptDeclineMessage;
+
+        if(this.props.orderAccepted) {
+            orderAcceptDeclineMessage =  
+                        <div className="order-dec">
+                            <span style={{color:'green'}}><FontAwesomeIcon icon={faCheck} size="5x"/> </span>
+                            <h3 style={{marginTop:'10px',color:'green'}}>Successfully accepted the order!</h3>
+                        </div>
+        }
+
+        if(this.props.orderDeclined) {
+            orderAcceptDeclineMessage =  
+                        <div className="order-dec">
+                            <span style={{color:'red'}}><FontAwesomeIcon icon={faTimesCircle} size="5x"/> </span>
+                            <h3 style={{marginTop:'10px',color:'red'}}>Order Declined!</h3>
+                        </div>
+        }
 
         if(!this.props.orderContents) {
             contentsHint = <div className="order-content-hint">
@@ -38,6 +57,7 @@ class OrderContents extends Component {
         else {
             orderList = 
                     <div className="order-details">
+                        {orderAcceptDeclineMessage}
                         <div className="customer-details customer-name"><strong>Name: </strong>{orderDetails.customerName}</div>
                         <div className="customer-details customer-mobile-no"><strong>Mobile: </strong>{orderDetails.phoneNo}</div>
                         <div className="customer-details order-table-no"><strong>Order Number: </strong>{orderDetails.orderNumber}</div>
