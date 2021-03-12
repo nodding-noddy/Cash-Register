@@ -57,11 +57,11 @@ class OrderContents extends Component {
         else {
             orderList = 
                     <div className="order-details">
-                        {orderAcceptDeclineMessage}
                         <div className="customer-details customer-name"><strong>Name: </strong>{orderDetails.customerName}</div>
                         <div className="customer-details customer-mobile-no"><strong>Mobile: </strong>{orderDetails.phoneNo}</div>
                         <div className="customer-details order-table-no"><strong>Order Number: </strong>{orderDetails.orderNumber}</div>
                         <div className="order-list">
+                        {orderAcceptDeclineMessage}
                             {this.props.orderContents && orderDetails.items.map(item => 
                                 <OrderContentsList 
                                     userId={this.props.userId}

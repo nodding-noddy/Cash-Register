@@ -98,6 +98,17 @@
     overflow-y:auto;
 }
 
+.current-menu-items::-webkit-scrollbar{
+    background-color:gray;
+    width:7px;
+}
+
+.current-menu-items::-webkit-scrollbar-thumb{
+    background-color: blue;
+    width:2px;
+    border-radius:18px;
+}
+
 .current-menu-items .item {
     display:flex;
     align-items: center;

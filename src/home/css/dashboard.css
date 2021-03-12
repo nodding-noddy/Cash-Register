@@ -20,9 +20,9 @@
     width:70%;
 }
 
-.order-details {
+/* .order-details {
     position:relative;
-}
+} */
 
 .order-dec {
     position:absolute;
@@ -266,6 +266,7 @@ img {
 }
 
 .order-list {
+    position:relative;
     overflow:auto;
     height:350px;
 }
@@ -332,7 +333,7 @@ hr {
 }
 
 .accept-decline-button:active {
-    transform:scale(1.05);
+    transform:scale(.85);
 }
 
 .accept:hover {
