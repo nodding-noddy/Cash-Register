@@ -16,16 +16,27 @@ class CheckOut extends Component {
 
     componentDidMount() {
         const {details} = this.props.location.state;
-        console.log('Checkout',this.props.location.state.details.orderNumber);
+        console.log('Checkout',this.props.location.state.details.orderStatus);
     }
 
     sendNotification = (event) => {
-        this.setState({
-            notificationSent:true
-        });
-        event.currentTarget.disabled = true;
-        setTimeout(() => document.getElementById('notification-button').disabled = false, 4000);
-        socket.emit('collect order', this.props.location.state.details.orderNumber);
+        if(!this.state.notificationSent) {
+            if(this.props.location.state.details.orderStatus !== 'served') {
+                this.setState({
+                    notificationSent:true
+                });
+                event.currentTarget.disabled = true;
+                setTimeout(() => document.getElementById('notification-button').disabled = false, 4000);
+                this.props.updateTotalOrderServed(this.props.location.state.details.orderNumber);
+                socket.emit('collect order', this.props.location.state.details.orderNumber);
+            }
+            else {
+                console.log('Notification has already been sent for this order');
+            }
+        }
+        else {
+            console.log('Already notified');
+        }
     }
 
     pushBack = () => {

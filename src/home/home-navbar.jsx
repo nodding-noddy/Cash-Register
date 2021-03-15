@@ -304,7 +304,7 @@ class HomeNavBar extends Component {
                                 <CreateAccount />
                             </Route>
                             <Route path="/checkout">
-                                <CheckOut />
+                                <CheckOut updateTotalOrderServed={this.props.updateTotalOrderServed} />
                             </Route>
                         </Switch>
                     </CSSTransition>

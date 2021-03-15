@@ -30,6 +30,7 @@ class DashBoard extends Component {
                 localStorage.setItem('crDate',new Date().toLocaleDateString().slice(0,2));
             }
         }
+        console.log('State after updating total order served from DASHBOARD:',this.props.orderSummary);
     }
 
     render() {

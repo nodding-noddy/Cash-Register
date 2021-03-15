@@ -74,6 +74,10 @@ class App extends Component {
 
         // });
     }
+
+    componentWillUnmount() {
+        console.log('App component now unmounting');
+    }
     setGlobalUserLogin = (globalUserData) => {
 
         if(globalUserData.reqAccepted) {
@@ -146,7 +150,6 @@ class App extends Component {
     }
 
     setCurrentlySelectedOrder = (order) => {
-        console.log(order);
         this.setState({
             orderAccepted:false
         })
@@ -162,6 +165,8 @@ class App extends Component {
                 orderContents:true
             })
         }
+
+        console.log('This',this.state.allOrders);
     }
 
     showOrderContents = (event) => {
@@ -211,12 +216,38 @@ class App extends Component {
         });
     }
 
-    updateTotalOrderServed = (updatedCount) => {
+    updateTotalOrderServed = (orderNumber) => {
         this.setState( prevState => ({
             orderSummary: {
                 ...prevState.orderSummary, totalOrderServed:prevState.orderSummary.totalOrderServed + 1
             }
-        }))
+        }), () => {
+            localStorage.setItem('reactState', JSON.stringify(this.state));
+        });
+
+        let newAllOrdersArray = [...this.state.allOrders];
+
+        let indexOfOrder;
+
+        for(let i = 0; i < newAllOrdersArray.length; i++) {
+            if(newAllOrdersArray[i].orderNumber === orderNumber) {
+                indexOfOrder = i;
+            }
+        }
+
+        let order = {...newAllOrdersArray[indexOfOrder]};
+
+        order.orderStatus = 'served';
+
+        newAllOrdersArray[indexOfOrder] = order;
+
+        // console.log('Order is',order, 'and order no', orderNumber);
+
+        this.setState({
+            allOrders:newAllOrdersArray
+        })
+
+        // console.log('State after updating total order served',this.state.orderSummary);
     }
 
     showNewNotification = (orderNumber) => {
@@ -251,15 +282,17 @@ class App extends Component {
     reloadPrevState = () => {
         let recoveredState = localStorage.getItem('reactState');
         recoveredState = JSON.parse(recoveredState);
-        if(recoveredState) {
-            if(recoveredState.userIsLoggedIn === false) {
-                recoveredState.userIsLoggedIn = true;
-                localStorage.setItem('reactState',JSON.stringify(recoveredState));
+        if(!this.state.userIsLoggedIn) {
+            if(recoveredState) {
+                if(recoveredState.userIsLoggedIn === false) {
+                    recoveredState.userIsLoggedIn = true;
+                    localStorage.setItem('reactState',JSON.stringify(recoveredState));
+                }
+                this.setState({...recoveredState});
             }
-            this.setState({...recoveredState});
-        }
-        else {
-        }
+            else {
+            }
+    }
     }
 
     updateOrderStatus = (totalAmount, orderNumber, isConfirmed) => {
@@ -368,7 +401,6 @@ class App extends Component {
 
         return (
 
-            <Switch>
                 <HomeNavBar orderSummary={this.state.orderSummary} globalUserLoginStatus={this.state.userIsLoggedIn}
                         allOrders={this.state.allOrders} 
                         allNotif={this.state.allNotif}
@@ -390,8 +422,8 @@ class App extends Component {
                         orderDeclined = {this.state.orderDeclined}
                         activateAutoComplete={this.activateAutoComplete}
                         suggestions={this.state.suggestions}
+                        updateTotalOrderServed={this.updateTotalOrderServed}
                         /> 
-            </Switch>
         )
     }
 }

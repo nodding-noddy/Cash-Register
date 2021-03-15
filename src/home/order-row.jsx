@@ -11,8 +11,11 @@ class OrderRow extends Component {
         if(orderData.orderStatus === 'pending') {
             orderStatus = <td><div className="pending order-status"><strong>Pending</strong></div></td>
         }
-        else {
+        else if(orderData.orderStatus === 'accepted') {
             orderStatus = <td><div className="completed order-status"><strong>Accepted</strong></div></td>
+        }
+        else {
+            orderStatus = <td><div className="completed order-status"><strong>Served</strong></div></td>
         }
 
         return(
