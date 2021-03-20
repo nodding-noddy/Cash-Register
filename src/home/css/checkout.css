@@ -1,0 +1,88 @@
+ .checkout-holder {
+    position: absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    background-color:#f0f0f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkout {
+    height:400px;
+    width:600px;
+    color:#363634;
+    overflow-y:auto;
+    overflow-x:hidden;
+} 
+
+.checkout::-webkit-scrollbar{
+    background-color:gray;
+    width:7px;
+}
+
+.checkout::-webkit-scrollbar-thumb{
+    background-color: blue;
+    width:2px;
+    border-radius:18px;
+}
+
+.go-back {
+    position: absolute;
+    top:2%;
+    left:4%;
+    color:var(--primary-font-color)
+}
+
+.total-amount-checkout {
+    color:#363634;
+    margin-top:20px;
+    display:flex;
+    justify-content: flex-end;
+}
+
+.td{
+    width:200px;
+    transform:translateX(-25%)
+}
+
+.td strong{
+    margin-right:10px;
+}
+
+.print-buttons {
+    display:flex;
+    justify-content: flex-end;
+}
+.checkout-button {
+    margin-top:20px;
+    margin-right:20px;
+    border:none;
+    width:50%;
+    padding:12px 12px;
+    border-radius:8px;
+    color:white;
+    font-size:1rem;
+    transition:background-color .4s ease-out;
+    outline: none;
+}
+
+.print-button {
+    background-color:var(--primary-color);
+}
+
+.cancel-button {
+    background-color:rgba(255,0,0,0.68);
+} 
+
+.print-button:hover {
+    cursor:pointer;
+    background-color: #280f75;
+}
+
+.cancel-button:hover {
+    cursor:pointer;
+    background-color: #cf0404;
+}
