@@ -29,11 +29,19 @@ class Settings extends Component {
         if(!this.props.globalUserLoginStatus) {
             this.props.history.push('/login');
         }
+
+        if(!this.props.sideBar) {
+            this.props.sideBarIsVisible(true);
+        }
     }
 
     componentWillUnmount() {
         let sideBar = document.querySelector('.settings-side-bar');
         sideBar.style.transform = 'translateX(-100%)';
+
+        if(this.props.sideBar) {
+            this.props.sideBarIsVisible(false);
+        }
     }
 
     toggleChangeUsername = () => {

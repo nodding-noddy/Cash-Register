@@ -202,7 +202,7 @@ class HomeNavBar extends Component {
                             </div>
                             <div className="settings notif-set pointer">
                                 <div className="color-filler opposite-color-filler"></div>
-                               <span><Link to="/settings">Settings</Link> <FontAwesomeIcon icon={faSlidersH} /></span>
+                               <span>{!this.props.sideBar && <Link to="/settings">Settings</Link>} <FontAwesomeIcon icon={faSlidersH} /></span>
                             </div>
                             <div onClick={this.showProfileOptions} className="profile-icon pointer">
                                 <div className="color-filler"></div>
@@ -294,7 +294,9 @@ class HomeNavBar extends Component {
                             </Route>
                             <Route path="/settings">
                                 <Settings menuItems={this.props.menuItems}  globalUserLoginStatus={this.props.globalUserLoginStatus}
-                                userId={this.props.userId}/>
+                                userId={this.props.userId}
+                                sideBar={this.props.sideBar}
+                                sideBarIsVisible={this.props.sideBarIsVisible}/>
                             </Route>
                             <Route path="/login">
                                 <MainContent globalUserLoginStatus={this.props.globalUserLoginStatus}

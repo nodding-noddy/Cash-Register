@@ -39,7 +39,8 @@ class App extends Component {
             orderContents:false,
             orderAccepted:false,
             orderDeclined:false,
-            suggestions:[]
+            suggestions:[],
+            sideBar:false
         }
 
         // socket = io('http://localhost:8000/');
@@ -397,6 +398,12 @@ class App extends Component {
         }
     }
 
+    sideBarIsVisible = (visibility) => {
+        this.setState({
+            sideBar:visibility
+        })
+    }
+
     render() {
 
         return (
@@ -423,6 +430,8 @@ class App extends Component {
                         activateAutoComplete={this.activateAutoComplete}
                         suggestions={this.state.suggestions}
                         updateTotalOrderServed={this.updateTotalOrderServed}
+                        sideBar={this.state.sideBar}
+                        sideBarIsVisible={this.sideBarIsVisible}
                         /> 
         )
     }
