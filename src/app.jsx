@@ -61,24 +61,8 @@ class App extends Component {
                 this.props.history.push('/');
             }
         }
-
-        // socket.on('initial-config',(configuration) => {
-        //     appConfiguration = configuration;
-        // });
-
-        // socket.on('new order', (orderDetails) => {
-        //     // this.updateTotalOrderCount();
-        //     // this.updateTotalOrderAmount(totalAmount);
-        //     this.showNewNotification(orderDetails.tableNumber);
-
-        //     this.updateAllOrdersList(orderDetails);
-
-        // });
     }
 
-    componentWillUnmount() {
-        console.log('App component now unmounting');
-    }
     setGlobalUserLogin = (globalUserData) => {
 
         if(globalUserData.reqAccepted) {
@@ -130,21 +114,6 @@ class App extends Component {
     }
 
     updateAllOrdersList = (newOrderData) => {
-        // let tableBody = document.querySelector('tbody');
-        // let newOrder = document.createElement('tr');
-        // newOrder.setAttribute('name',newOrderData.tableNumber);
-        // newOrder.addEventListener('click', e => this.showOrderContents(e));
-        // newOrder.innerHTML = `
-        //     <td>${newOrderData.totalItems.length}</td>
-        //     <td>${newOrderData.time}</td>
-        //     <td>${newOrderData.customerName}</td>
-        //     <td><div className="pending order-status"><strong>${newOrderData.status}</strong></div>}</td>
-        // `
-        // tableBody.prepend(newOrder);
-        
-        // this.setState(prevState => ({
-        //     allOrders:[...prevState.allOrders, newOrder]
-        // }))
         this.setState(prevState => ({
             allOrders:[newOrderData,...prevState.allOrders]
         }))
@@ -167,7 +136,6 @@ class App extends Component {
             })
         }
 
-        console.log('This',this.state.allOrders);
     }
 
     showOrderContents = (event) => {
@@ -242,21 +210,13 @@ class App extends Component {
 
         newAllOrdersArray[indexOfOrder] = order;
 
-        // console.log('Order is',order, 'and order no', orderNumber);
-
         this.setState({
             allOrders:newAllOrdersArray
         })
 
-        // console.log('State after updating total order served',this.state.orderSummary);
     }
 
     showNewNotification = (orderNumber) => {
-        // let newDiv;
-        // newDiv = <div className="notification">
-        //             <FontAwesomeIcon icon={faPlus} />
-        //             <strong>A new order has been placed at {tableNumber}</strong> 
-        //         </div>
         this.setState(prevState => ({
             allNotif:[orderNumber, ...prevState.allNotif]
         }));
@@ -265,9 +225,6 @@ class App extends Component {
             newNotification:true
         })
 
-        // this.setState(prevState => ({
-        //     allNotif: {...prevState.allNotif,recievedNotification:[...prevState.allNotif.recievedNotification, newDiv]}
-     // }));
     }
 
     turnOffNewNotif = () => {
@@ -297,9 +254,7 @@ class App extends Component {
     }
 
     updateOrderStatus = (totalAmount, orderNumber, isConfirmed) => {
-        console.log('Deducted amt will be',totalAmount);
         const orderArray = [...this.state.allOrders];
-        // orderNumber = orderNumber + '';
         if(isConfirmed) {
             this.setState({
                 orderAccepted:true
@@ -356,12 +311,6 @@ class App extends Component {
             }, () => {
                 localStorage.setItem('reactState',JSON.stringify(this.state));
             })
-            // let newStorage = JSON.parse(localStorage.getItem('reactState'));
-            // newStorage.allOrders = modifiedArray;
-            // newStorage.orderSummary.totalOrderAmount = newStorage.orderSummary.totalOrderAmount - totalAmount;
-            // if(this.state.orderSummary.totalOrderCount > 0) 
-            //     newStorage.orderSummary.totalOrderCount = newStorage.orderSummary.totalOrderCount - 1;
-            // localStorage.setItem('reactState',JSON.stringify(newStorage));
         }
     }
 
@@ -371,19 +320,6 @@ class App extends Component {
                 let num = order.orderNumber + '';
                 return num.startsWith(value);
             })
-            // newArray = newArray.map(order => {
-            //     let status;
-            //     if(order.orderStatus === 'pending') {
-            //         status = "pending";
-            //     }
-            //     else {
-            //         status="completed"
-            //     }
-            //     return `<li class="suggestion-li">
-            //                 <div class="suggestion">${order.orderNumber}<div class="order-status ${status}"><strong>${order.orderStatus}</strong></div></div>
-            //             </li>`
-
-            // });
 
         if(newArray.length === 0 || value === '' || value === ' ') {
             autoComplete.style.display = 'none';
@@ -393,8 +329,6 @@ class App extends Component {
                 suggestions:newArray
             })
             autoComplete.style.display='block';
-            // autoComplete.innerHTML = newArray.join('');
-            // console.log(newArray);
         }
     }
 
@@ -412,7 +346,6 @@ class App extends Component {
                         allOrders={this.state.allOrders} 
                         allNotif={this.state.allNotif}
                         setGlobalUserLogin={this.setGlobalUserLogin}
-                        // menuItems={appConfiguration}
                         menuItems={this.state.menu}
                         userId={this.state.userId}
                         addOrder={this.addOrder}
