@@ -86,55 +86,6 @@ class OrderContents extends Component {
                 <div className="order-contents-details">
                     {contentsHint}
                     {orderList}
-                            {/* <div className="order-image-holder">
-                                <div className="order-img-and-title">
-                                <div className="order-image m-t-20">
-                                    <img src="/images/itachi-pole.jpg" alt=""/> 
-                                    </div>
-                                    <span className="order-img-description"> <strong>Veg Kathi Roll with extra Masala</strong> </span>
-                                </div>
-                                <div className="quantity">
-                                    <strong>Qty.</strong> 1
-                                </div>
-                            </div>
-                            <hr />
-                            <div className="order-image-holder">
-                                <div className="order-img-and-title">
-                                <div className="order-image m-t-20">
-                                    <img src="/images/itachi-pole.jpg" alt=""/> 
-                                    </div>
-                                    <span className="order-img-description"> <strong>Something</strong> </span>
-                                </div>
-                                <div className="quantity">
-                                    <strong>Qty.</strong> 1
-                                </div>
-                            </div>
-                            <hr />
-                            <div className="order-image-holder">
-                                <div className="order-img-and-title">
-                                <div className="order-image m-t-20">
-                                    <img src="/images/itachi-pole.jpg" alt=""/> 
-                                    </div>
-                                    <span className="order-img-description"> <strong>Something</strong> </span>
-                                </div>
-                                <div className="quantity">
-                                    <strong>Qty.</strong> 1
-                                </div>
-                            </div>
-                            <hr />
-                            <div className="order-image-holder">
-                                <div className="order-img-and-title">
-                                <div className="order-image m-t-20">
-                                    <img src="/images/itachi-pole.jpg" alt=""/> 
-                                    </div>
-                                    <span className="order-img-description"> <strong>Something</strong> </span>
-                                </div>
-                                <div className="quantity">
-                                    <strong>Qty.</strong> 1
-                                </div>
-                            </div>
-                            <hr /> */}
-                        {/* </div> */}
                 </div> 
             </div>
         )

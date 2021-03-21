@@ -34,67 +34,7 @@ class AllOrders extends Component {
                             <tbody>
                                 {allOrderData.map((order,index) => {
                                     return <OrderRow setCurrentlySelectedOrder={this.props.setCurrentlySelectedOrder} key={order.orderNumber} orderData={order} />
-                                    // <tr key={order.orderNumber}>
-                                    //     <td>{order.items.length}</td>
-                                    //     <td>19:00</td>
-                                    //     <td>{order.customerName}</td>
-                                    //     <td><div className="pending order-status"> <strong>Pending</strong> </div></td>
-                                    // </tr>
                                 })}
-                                {/* <tr>
-                                    <td>2</td>
-                                    <td>19.58</td>
-                                    <td>Shubh</td>
-                                    <td><div className="completed order-status"> <strong>Done</strong> </div></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>19.58</td>
-                                    <td>Shubh</td>
-                                    <td><div className="completed order-status"> <strong>Done</strong> </div></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>19.58</td>
-                                    <td>Shubh</td>
-                                    <td><div className="pending order-status"> <strong>Pending</strong> </div></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>19.58</td>
-                                    <td>Shubh</td>
-                                    <td><div className="pending order-status"> <strong>Pending</strong> </div></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>19.58</td>
-                                    <td>Shubh</td>
-                                    <td><div className="pending order-status"> <strong>Pending</strong> </div></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>19.58</td>
-                                    <td>Shubh</td>
-                                    <td><div className="pending order-status"> <strong>Pending</strong> </div></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>19.58</td>
-                                    <td>Shubh</td>
-                                    <td><div className="pending order-status"> <strong>Pending</strong> </div></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>19.58</td>
-                                    <td>Shubh</td>
-                                    <td><div className="pending order-status"> <strong>Pending</strong> </div></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>19.58</td>
-                                    <td>Shubh</td>
-                                    <td><div className="pending order-status"> <strong>Pending</strong> </div></td>
-                                </tr> */}
                             </tbody>
                         </table>
                         {noOrders}

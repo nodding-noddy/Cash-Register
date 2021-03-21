@@ -36,8 +36,6 @@ class MainContent extends Component {
         })
         .then(response => response.json());
 
-        // console.log(this.props);
-
         if(result.reqAccepted) {
             this.props.setGlobalUserLogin(result);
         }

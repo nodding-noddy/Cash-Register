@@ -33,36 +33,6 @@ class CurrentMenuItems extends Component {
                     </React.Fragment>
                     )}
                     {noMenuItems}
-                {/* <div className="item">
-                    <img src="/images/itachi-pole.jpg" alt=""/>
-                    <div className="item-title"><strong>Veg Kathee Roll</strong></div>
-                </div>
-                <hr />
-                <div className="item">
-                    <img src="/images/itachi-pole.jpg" alt=""/>
-                    <div className="item-title"><strong>Veg Kathee Roll</strong></div>
-                </div>
-                <hr />
-                <div className="item">
-                    <img src="/images/itachi-pole.jpg" alt=""/>
-                    <div className="item-title"><strong>Veg Kathee Roll</strong></div>
-                </div>
-                <hr />
-                <div className="item">
-                    <img src="/images/itachi-pole.jpg" alt=""/>
-                    <div className="item-title"><strong>Veg Kathee Roll</strong></div>
-                </div>
-                <hr />
-                <div className="item">
-                    <img src="/images/itachi-pole.jpg" alt=""/>
-                    <div className="item-title"><strong>Veg Kathee Roll</strong></div>
-                </div>
-                <hr />
-                <div className="item">
-                    <img src="/images/itachi-pole.jpg" alt=""/>
-                    <div className="item-title"><strong>Veg Kathee Roll</strong></div>
-                </div>
-                <hr /> */}
             </div>
         )
     }

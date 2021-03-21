@@ -36,19 +36,16 @@ class DashBoard extends Component {
     render() {
 
         return (
-            <React.Fragment>
-                {/* <HomeNavBar /> */}
-                <div className="dashboard m-t-50">
-                    <OrderSummary orderSummary={this.props.orderSummary}
-                    updateTotalOrderCount={this.props.updateTotalOrderCount} />
-                    <AllOrders allOrders={this.props.allOrders}
-                    setCurrentlySelectedOrder={this.props.setCurrentlySelectedOrder} />
-                    <OrderContents selectedOrder={this.props.selectedOrder}
-                    orderContents={this.props.orderContents} 
-                    userId={this.props.userId} updateOrderStatus={this.props.updateOrderStatus}
-                    orderAccepted={this.props.orderAccepted} orderDeclined={this.props.orderDeclined}/>
-                </div>
-            </React.Fragment>
+            <div className="dashboard m-t-50">
+                <OrderSummary orderSummary={this.props.orderSummary}
+                updateTotalOrderCount={this.props.updateTotalOrderCount} />
+                <AllOrders allOrders={this.props.allOrders}
+                setCurrentlySelectedOrder={this.props.setCurrentlySelectedOrder} />
+                <OrderContents selectedOrder={this.props.selectedOrder}
+                orderContents={this.props.orderContents} 
+                userId={this.props.userId} updateOrderStatus={this.props.updateOrderStatus}
+                orderAccepted={this.props.orderAccepted} orderDeclined={this.props.orderDeclined}/>
+            </div>
         )
     }
 }

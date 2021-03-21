@@ -20,10 +20,6 @@
     width:70%;
 }
 
-/* .order-details {
-    position:relative;
-} */
-
 .order-dec {
     position:absolute;
     right:0;
@@ -40,14 +36,12 @@
     grid-area: order-summary;
     display:flex;
     flex-direction: column;
-    /* background-color: magenta; */
 }
 
 
 .all-orders {
     grid-area: all-orders;
     color: var(--primary-font-color);
-    /* background-color: maroon; */
 }
 
 .order-summary-icons {
@@ -60,7 +54,6 @@
 .order-icons {
     display:flex;
     align-items: flex-end;
-    /* line-height: 100%; */
     color:var(--primary-font-color);
 }
 
@@ -109,7 +102,6 @@
 }
 
 table {
-    /* table-layout: fixed; */
     border-collapse: collapse;
     width:100%;
 }
@@ -127,7 +119,6 @@ table tr {
 }
 table tr:hover {
     cursor:pointer;
-    /* border-bottom: 3px solid rgba(0, 0, 0, 0.2); */
     transform:scale(1.025);
 }
 
@@ -262,7 +253,6 @@ img {
     width:80px;
     border-radius:8px;
     overflow:hidden;
-    /* border-bottom:1px solid black; */
 }
 
 .order-list {

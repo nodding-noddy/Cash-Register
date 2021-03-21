@@ -41,14 +41,6 @@ class HomeNavBar extends Component {
         }
     }
 
-        // afterTransition = () => {
-    //     let allNotif = document.querySelector('.all-notifications');
-                    
-    //             if(allNotif.style.display === 'block' && this.state.clicked ) {
-    //                 allNotif.style.display = 'none';
-    //     }
-    // }
-
     handleLogout = () => {
         this.props.setGlobalUserLogin(false);
     }
@@ -103,7 +95,6 @@ class HomeNavBar extends Component {
     }
 
     handleBurgerNotifications = () => {
-        // let burgerNotificationHolder = document.querySelector('.burger-notification-holder');
         let burgerNotifications = document.querySelector('.burger-notifications');
 
         if(burgerNotifications.style.height === '400px') 
@@ -141,19 +132,6 @@ class HomeNavBar extends Component {
         }
     }
 
-    // setUserInput = (event) => {
-
-    //     // const value = event.currentTarget.value;
-
-    //     // suggestions = this.props.allOrders.filter(order => {
-    //     //     let num = order.orderNumber + '';
-    //     //     return num.startsWith(value);
-    //     // })
-
-    //     this.props.activateAutoComplete(event.currentTarget.value);
-    //     // console.log(this.props.suggestions);
-
-    // }
     render() {
         let searchBar;
         let rightNav;
@@ -184,11 +162,6 @@ class HomeNavBar extends Component {
                                                     }
                                                 }}>{suggestion.orderNumber}</Link><div className={`order-status ${status}`}><strong>{suggestion.orderStatus}</strong></div></div> </li>)
                                             })}
-                                            {/* <li> <div className="suggestion">Suggestion<div className="order-status"><strong>Done</strong></div></div> </li>
-                                            <li> <div className="suggestion">Suggestion<div className="order-status"><strong>Done</strong></div></div> </li>
-                                            <li> <div className="suggestion">Suggestion<div className="order-status"><strong>Completed</strong></div></div> </li>
-                                            <li> <div className="suggestion">Suggestion<div className="order-status"><strong>Done</strong></div></div> </li>
-                                            <li> <div className="suggestion">Suggestion<div className="order-status"><strong>Pending</strong></div></div> </li> */}
                                         </ul>
                                 </div>
                             </div>

@@ -28,7 +28,6 @@ class AllNotifications extends Component {
                                 <strong>A new order has been placed with order number #{notif}</strong> 
                         </div>
                     )}
-                        {/* {this.props.allNotif.recievedNotification} */}
                 </div>
             </div>
         )
